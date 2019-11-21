@@ -103,15 +103,18 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-  margin-bottom: 2rem;
+  margin-bottom: $layout-03;
 }
 .cv-data-table {
-  margin-bottom: 2rem;
+  margin-bottom: $layout-03;
 }
 .bx--accordion__item {
   border: none;
 }
 .bx--accordion__content {
   padding: 0;
+}
+.bx--table-toolbar {
+  background-color: $ui-02;
 }
 </style>
