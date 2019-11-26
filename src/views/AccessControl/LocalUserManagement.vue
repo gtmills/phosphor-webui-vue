@@ -7,20 +7,38 @@
     </b-row>
     <b-row>
       <b-col lg="8" md="10">
-        <b-table bordered head-variant="dark" :items="userTable.data"></b-table>
+        <b-table
+          bordered
+          head-variant="dark"
+          :items="userTable.items"
+        ></b-table>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col lg="6" md="8">
+        <b-button v-b-toggle.collapse-role-table variant="info" class="mt-3">
+          View privilege role descriptions
+        </b-button>
+        <b-collapse id="collapse-role-table" class="mt-3">
+          <role-table />
+        </b-collapse>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import LocalUserManagementRoleTable from "./LocalUserMangementRoleTable";
+
 export default {
   name: "local-users",
-  components: {},
+  components: {
+    roleTable: LocalUserManagementRoleTable
+  },
   data() {
     return {
       userTable: {
-        data: [
+        items: [
           { username: "root", privilege: "Admin", status: "Enabled" },
           { username: "user", privilege: "User", status: "Enabled" }
         ]
