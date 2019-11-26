@@ -60,27 +60,8 @@ export default {
           { username: "root", privilege: "Admin", status: "Enabled" },
           { username: "user", privilege: "User", status: "Enabled" }
         ]
-      },
-      modal: {
-        addUserOpen: false,
-        settingsOpen: false
-      },
-      accordion: {
-        expanded: false
       }
     };
-  },
-  methods: {
-    onClickAdd() {
-      this.modal.addUserOpen = true;
-    },
-    onClickSettings() {
-      this.modal.settingsOpen = true;
-    },
-    modalClosed() {
-      this.modal.settingsOpen = false;
-      this.modal.addUserOpen = false;
-    }
   }
 };
 </script>
