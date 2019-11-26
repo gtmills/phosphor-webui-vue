@@ -3,11 +3,21 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Axios from "axios";
-import CarbonComponentsVue from "@carbon/vue";
-import "@/assets/styles/index.scss";
+import {
+  ButtonPlugin,
+  NavPlugin,
+  CollapsePlugin,
+  LinkPlugin,
+  NavbarPlugin
+} from "bootstrap-vue";
+
+Vue.use(ButtonPlugin);
+Vue.use(NavPlugin);
+Vue.use(CollapsePlugin);
+Vue.use(LinkPlugin);
+Vue.use(NavbarPlugin);
 
 Vue.prototype.$http = Axios;
-Vue.use(CarbonComponentsVue);
 
 new Vue({
   router,

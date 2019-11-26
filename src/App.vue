@@ -2,14 +2,14 @@
   <div id="app">
     <AppHeader />
     <AppNavigation />
-    <cv-content id="#main-content">
+    <main id="#main-content">
       <router-view />
-    </cv-content>
+    </main>
   </div>
 </template>
 
 <style lang="scss">
-@import "@/assets/styles/_carbon";
+@import "@/assets/styles/_obmc-custom";
 </style>
 
 <script>

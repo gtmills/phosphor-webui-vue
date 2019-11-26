@@ -30,7 +30,7 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
-  linkExactActiveClass: "bx--side-nav__link--current"
+  linkExactActiveClass: "nav__link--current"
 });
 
 export default router;
