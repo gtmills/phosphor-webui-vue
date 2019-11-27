@@ -91,8 +91,12 @@ export default {
       return this.allUsers.map(user => {
         return {
           username: user.UserName,
-          privilege: user.Role,
-          status: user.Status,
+          privilege: user.RoleId,
+          status: user.Locked
+            ? "Locked"
+            : user.Enabled
+            ? "Enabled"
+            : "Disabled",
           actions: {
             edit: true,
             delete: user.UserName === "root" ? false : true
