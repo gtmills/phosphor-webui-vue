@@ -5,17 +5,19 @@ import store from "./store";
 import Axios from "axios";
 import {
   ButtonPlugin,
-  NavPlugin,
   CollapsePlugin,
+  LayoutPlugin,
   LinkPlugin,
-  NavbarPlugin
+  NavbarPlugin,
+  NavPlugin
 } from "bootstrap-vue";
 
+Vue.use(LayoutPlugin);
 Vue.use(ButtonPlugin);
-Vue.use(NavPlugin);
 Vue.use(CollapsePlugin);
 Vue.use(LinkPlugin);
 Vue.use(NavbarPlugin);
+Vue.use(NavPlugin);
 
 Vue.prototype.$http = Axios;
 
