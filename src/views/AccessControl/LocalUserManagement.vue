@@ -15,7 +15,7 @@
     </b-row>
     <b-row>
       <b-col lg="8" md="10">
-        <b-table bordered head-variant="dark" :items="userTable.items">
+        <b-table bordered head-variant="dark" :items="tableItems" show-empty>
           <template v-slot:head(actions)="data"></template>
           <template v-slot:cell(actions)="data">
             <b-button
@@ -79,31 +79,32 @@ export default {
     Edit20,
     roleTable: LocalUserManagementRoleTable
   },
-  data() {
-    return {
-      userTable: {
-        items: [
-          {
-            username: "root",
-            privilege: "Admin",
-            status: "Enabled",
-            actions: {
-              edit: true,
-              delete: false
-            }
-          },
-          {
-            username: "user",
-            privilege: "User",
-            status: "Enabled",
-            actions: {
-              edit: true,
-              delete: true
-            }
+  created() {
+    this.getUsers();
+  },
+  computed: {
+    allUsers() {
+      return this.$store.getters["localUsers/allUsers"];
+    },
+    tableItems() {
+      // transform user data to table data
+      return this.allUsers.map(user => {
+        return {
+          username: user.UserName,
+          privilege: user.Role,
+          status: user.Status,
+          actions: {
+            edit: true,
+            delete: user.UserName === "root" ? false : true
           }
-        ]
-      }
-    };
+        };
+      });
+    }
+  },
+  methods: {
+    getUsers() {
+      this.$store.dispatch("localUsers/getUsers");
+    }
   }
 };
 </script>
