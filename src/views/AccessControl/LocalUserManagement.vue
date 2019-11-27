@@ -45,10 +45,20 @@
       </b-col>
     </b-row>
     <!-- Modals -->
-    <b-modal id="modal-add-user" title="Add user">
+    <b-modal id="modal-add-user" title="Add user" ref="modal">
       <template v-slot:modal-footer="{ ok, cancel, hide }">
-        <b-button size="sm" variant="secondary">Cancel</b-button>
-        <b-button size="sm" variant="primary">Add user</b-button>
+        <b-button
+          size="sm"
+          variant="secondary"
+          @click="$bvModal.hide('modal-add-user')"
+          >Cancel</b-button
+        >
+        <b-button
+          size="sm"
+          variant="primary"
+          @click="$bvModal.hide('modal-add-user')"
+          >Add user</b-button
+        >
       </template>
     </b-modal>
     <b-modal id="modal-settings" title="Account policy settings"></b-modal>
