@@ -9,7 +9,9 @@ import {
   LayoutPlugin,
   LinkPlugin,
   NavbarPlugin,
-  NavPlugin
+  NavPlugin,
+  TablePlugin,
+  ModalPlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
@@ -17,6 +19,9 @@ Vue.use(ButtonPlugin);
 Vue.use(CollapsePlugin);
 Vue.use(LinkPlugin);
 Vue.use(NavbarPlugin);
+Vue.use(TablePlugin);
+Vue.use(LayoutPlugin);
+Vue.use(ModalPlugin);
 Vue.use(NavPlugin);
 
 Vue.prototype.$http = Axios;
