@@ -11,7 +11,10 @@ import {
   NavbarPlugin,
   NavPlugin,
   TablePlugin,
-  ModalPlugin
+  ModalPlugin,
+  BadgePlugin,
+  FormCheckboxPlugin,
+  ListGroupPlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
@@ -23,6 +26,11 @@ Vue.use(TablePlugin);
 Vue.use(LayoutPlugin);
 Vue.use(ModalPlugin);
 Vue.use(NavPlugin);
+Vue.use(BadgePlugin);
+Vue.use(FormCheckboxPlugin);
+Vue.use(ListGroupPlugin);
+
+Vue.use(require("vue-moment"));
 
 Vue.prototype.$http = Axios;
 
