@@ -1,7 +1,4 @@
-import Axios from "axios";
-Axios.defaults.auth = {};
-Axios.defaults.auth.username = process.env.VUE_APP_USERNAME;
-Axios.defaults.auth.password = process.env.VUE_APP_PASSWORD;
+import api from "../../api";
 
 const LocalUserManagementStore = {
   namespaced: true,
@@ -20,12 +17,13 @@ const LocalUserManagementStore = {
   },
   actions: {
     getUsers({ commit }) {
-      Axios.get("/redfish/v1/AccountService/Accounts")
+      api
+        .get("/redfish/v1/AccountService/Accounts")
         .then(response => {
           return response.data.Members.map(user => user["@odata.id"]);
         })
         .then(userIds => {
-          return Axios.all(userIds.map(user => Axios.get(user)));
+          return api.all(userIds.map(user => api.get(user)));
         })
         .then(users => {
           const userData = users.map(user => user.data);
