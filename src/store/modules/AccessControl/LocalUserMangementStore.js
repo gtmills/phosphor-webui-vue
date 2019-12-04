@@ -32,6 +32,17 @@ const LocalUserManagementStore = {
         .catch(error => {
           console.log(error);
         });
+    },
+    deleteUser({ commit }, username) {
+      console.log(commit, username);
+      api
+        .delete(`/redfish/v1/AccountService/Accounts/${username}`)
+        .then(() => {
+          // this.dispatch("localUsers/getUsers");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };
