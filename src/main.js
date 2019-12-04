@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import Axios from "axios";
 import {
   ButtonPlugin,
   CollapsePlugin,
@@ -31,8 +30,6 @@ Vue.use(FormCheckboxPlugin);
 Vue.use(ListGroupPlugin);
 
 Vue.use(require("vue-moment"));
-
-Vue.prototype.$http = Axios;
 
 new Vue({
   router,
