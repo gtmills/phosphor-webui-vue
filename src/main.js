@@ -29,8 +29,6 @@ Vue.use(BadgePlugin);
 Vue.use(FormCheckboxPlugin);
 Vue.use(ListGroupPlugin);
 
-Vue.use(require("vue-moment"));
-
 new Vue({
   router,
   store,

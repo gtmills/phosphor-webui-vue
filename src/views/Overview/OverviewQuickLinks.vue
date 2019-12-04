@@ -8,7 +8,7 @@
     <b-list-group-item>
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmc.Elapsed | moment("MMM Do YYYY, h:mm:ss A") }}</dd>
+        <dd>{{ bmc.Elapsed }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item>
