@@ -4,7 +4,7 @@
       #{{ logging.entry.Id }}
       <b-badge variant="danger">{{ logging.entry.Severity }}</b-badge>
       <div class="d-flex w-100 justify-content-between">
-        <small>{{ logging.entry.Timestamp }}</small>
+        <small>{{ logging.entry.Timestamp | date('MMM, DD YYYY HH:MM:SS A ZZ')  }}</small>
         <ChevronRight16 />
       </div>
       <p class="mb-1">{{ logging.entry.EventID }}: {{ logging.entry.Description }}</p>
