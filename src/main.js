@@ -10,7 +10,8 @@ import {
   NavbarPlugin,
   NavPlugin,
   TablePlugin,
-  ModalPlugin
+  ModalPlugin,
+  BadgePlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
@@ -22,6 +23,7 @@ Vue.use(TablePlugin);
 Vue.use(LayoutPlugin);
 Vue.use(ModalPlugin);
 Vue.use(NavPlugin);
+Vue.use(BadgePlugin);
 
 new Vue({
   router,
