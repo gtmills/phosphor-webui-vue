@@ -10,7 +10,7 @@
         </b-navbar-nav>
         <b-navbar-nav small class="ml-auto">
           <b-nav-item @click="logout">
-            <user-avatar-20 />
+            <icon-avatar />
             Logout
           </b-nav-item>
         </b-navbar-nav>
@@ -36,12 +36,14 @@
             <b-nav-item>
               <b-button variant="link">
                 Server power
-                <b-badge pill variant="success">Running</b-badge>
+                <b-badge pill :variant="hostStatusBadge">
+                  {{ hostStatus }}
+                </b-badge>
               </b-button>
             </b-nav-item>
             <b-nav-item>
               <b-button variant="link">
-                <Renew20 />
+                <icon-renew />
                 Refresh Data
               </b-button>
             </b-nav-item>
@@ -53,11 +55,11 @@
 </template>
 
 <script>
-import UserAvatar20 from "@carbon/icons-vue/es/user--avatar/20";
-import Renew20 from "@carbon/icons-vue/es/renew/20";
+import IconAvatar from "@carbon/icons-vue/es/user--avatar/20";
+import IconRenew from "@carbon/icons-vue/es/renew/20";
 export default {
   name: "AppHeader",
-  components: { Renew20, UserAvatar20 },
+  components: { IconAvatar, IconRenew },
   created() {
     this.getHostInfo();
   },
@@ -73,11 +75,22 @@ export default {
     },
     hostStatus() {
       return this.$store.getters["global/hostStatus"];
+    },
+    hostStatusBadge() {
+      switch (this.hostStatus) {
+        case "Running":
+          return "success";
+        case "Off":
+          return "secondary";
+        default:
+          return "light";
+      }
     }
   },
   methods: {
     getHostInfo() {
       this.$store.dispatch("global/getHostName");
+      this.$store.dispatch("global/getHostStatus");
     },
     logout() {
       this.$store.dispatch("authentication/logout").then(() => {
