@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import Axios from "axios";
 import {
   ButtonPlugin,
   CollapsePlugin,
@@ -23,8 +22,6 @@ Vue.use(TablePlugin);
 Vue.use(LayoutPlugin);
 Vue.use(ModalPlugin);
 Vue.use(NavPlugin);
-
-Vue.prototype.$http = Axios;
 
 new Vue({
   router,
