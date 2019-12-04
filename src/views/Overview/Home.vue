@@ -27,7 +27,7 @@
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ software.Version || N/A }}</dd>
+                <dd>{{ software.Version || "N/A" }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -38,25 +38,25 @@
             <b-col sm="6">
               <dl>
                 <dt>HOSTNAME</dt>
-                <dd>{{ network.config.HostName || N/A }}</dd>
+                <dd>{{ network.config.HostName || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MAC ADDRESS</dt>
-                <dd>{{ network.eth0.MACAddress || N/A }}</dd>
+                <dd>{{ network.eth0.MACAddress || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>IP ADDRESS</dt>
-                <dd>{{ network.ipv4.Address || N/A }}</dd>
+                <dd>{{ network.ipv4.Address || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ logging.entry.Version || N/A }}</dd>
+                <dd>{{ logging.entry.Version || "N/A" }}</dd>
               </dl>
             </b-col>
           </b-row>
