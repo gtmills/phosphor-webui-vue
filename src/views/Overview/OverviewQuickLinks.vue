@@ -3,12 +3,13 @@
     <b-list-group-item
       href="#"
       variant="danger"
-      v-show="logging.entry.Severity==='Error'"
-    >View 1 high priority event</b-list-group-item>
+      v-show="logging.entry.Severity === 'Error'"
+      >View 1 high priority event</b-list-group-item
+    >
     <b-list-group-item>
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmc.Elapsed | date('MMM, DD YYYY HH:MM:SS A ZZ')  }}</dd>
+        <dd>{{ bmc.Elapsed | date("MMM, DD YYYY HH:MM:SS A ZZ") }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item>
@@ -19,12 +20,18 @@
         <span v-else>off</span> server LED
       </b-form-checkbox>
     </b-list-group-item>
-    <b-list-group-item href="#" class="d-flex justify-content-between align-items-center">
+    <b-list-group-item
+      href="#"
+      class="d-flex justify-content-between align-items-center"
+    >
       <!-- TODO: link to SOL -->
       <span>Serial over LAN console</span>
       <ChevronRight16 />
     </b-list-group-item>
-    <b-list-group-item href="#" class="d-flex justify-content-between align-items-center">
+    <b-list-group-item
+      href="#"
+      class="d-flex justify-content-between align-items-center"
+    >
       <!-- TODO: link to network settings -->
       <span>Edit network settings</span>
       <ChevronRight16 />
