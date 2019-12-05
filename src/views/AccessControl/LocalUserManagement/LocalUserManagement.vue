@@ -7,10 +7,12 @@
     </b-row>
     <b-row>
       <b-col lg="10">
-        <b-button @click="initModalSettings" variant="secondary">
+        <b-button @click="initModalSettings" variant="link">
+          <icon-settings />
           Account policy settings
         </b-button>
         <b-button @click="initModalUser(null)" variant="primary">
+          <icon-add />
           Add user
         </b-button>
       </b-col>
@@ -50,13 +52,19 @@
     </b-row>
     <!-- Modals -->
     <modal-settings v-bind:settings="settings"></modal-settings>
-    <modal-user v-bind:user="activeUser" @hidden="clearActiveUser"></modal-user>
+    <modal-user
+      v-bind:user="activeUser"
+      @ok="saveUser"
+      @hidden="clearActiveUser"
+    ></modal-user>
   </b-container>
 </template>
 
 <script>
 import IconTrashcan from "@carbon/icons-vue/es/trash-can/20";
 import IconEdit from "@carbon/icons-vue/es/edit/20";
+import IconAdd from "@carbon/icons-vue/es/add--alt/20";
+import IconSettings from "@carbon/icons-vue/es/settings/20";
 
 import TableRoles from "./TableRoles";
 import ModalUser from "./ModalUser";
@@ -65,11 +73,13 @@ import ModalSettings from "./ModalSettings";
 export default {
   name: "local-users",
   components: {
-    IconTrashcan,
+    IconAdd,
     IconEdit,
-    TableRoles,
+    IconSettings,
+    IconTrashcan,
+    ModalSettings,
     ModalUser,
-    ModalSettings
+    TableRoles
   },
   data() {
     return {
@@ -131,6 +141,13 @@ export default {
         this.$bvModal.show("modal-settings");
       } else {
         // fetch settings then show modal
+      }
+    },
+    saveUser({ newUser, form }) {
+      if (newUser) {
+        this.$store.dispatch("localUsers/createUser", form);
+      } else {
+        this.$store.dispatch("localUsers/updateUser", form);
       }
     },
     deleteUser({ username }) {
