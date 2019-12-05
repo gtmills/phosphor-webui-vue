@@ -30,31 +30,25 @@ const AuthenticationStore = {
   },
   actions: {
     login({ commit }, auth) {
-      return new Promise((resolve, reject) => {
-        commit("authRequest");
-        api
-          .post("/login", auth)
-          .then(response => {
-            const token = response.data.token;
-            sessionStorage.setItem("token", token);
-            api.defaults.auth = auth; // TODO Permantent Solution
-            commit("authSuccess", token, auth);
-            resolve(response);
-          })
-          .catch(error => {
-            commit("authError");
-            sessionStorage.removeItem("token");
-            reject(error);
-          });
-      });
+      commit("authRequest");
+      return api
+        .post("/login", auth)
+        .then(response => {
+          const token = response.data.token;
+          sessionStorage.setItem("token", token);
+          api.defaults.auth = auth; // TODO Permantent Solution
+          commit("authSuccess", token, auth);
+        })
+        .catch(error => {
+          commit("authError");
+          sessionStorage.removeItem("token");
+          throw new Error(error);
+        });
     },
     logout({ commit }) {
-      return new Promise(resolve => {
-        commit("logout");
-        sessionStorage.removeItem("token");
-        api.defaults.auth = {}; // Permanent solution
-        resolve();
-      });
+      commit("logout");
+      sessionStorage.removeItem("token");
+      api.defaults.auth = {}; // Permanent solution
     }
   }
 };
