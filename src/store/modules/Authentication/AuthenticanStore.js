@@ -5,7 +5,7 @@ const AuthenticationStore = {
   state: {
     auth: {},
     status: "",
-    token: ""
+    token: sessionStorage.getItem("token") || ""
   },
   getters: {
     authStatus: state => state.status,
