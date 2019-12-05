@@ -4,33 +4,39 @@ import router from "./router";
 import store from "./store";
 import { dateFilter } from "vue-date-fns";
 import {
+  BadgePlugin,
   ButtonPlugin,
   CollapsePlugin,
+  FormPlugin,
+  FormCheckboxPlugin,
+  FormGroupPlugin,
+  FormInputPlugin,
   LayoutPlugin,
   LinkPlugin,
+  ListGroupPlugin,
+  ModalPlugin,
   NavbarPlugin,
   NavPlugin,
-  TablePlugin,
-  ModalPlugin,
-  BadgePlugin,
-  FormCheckboxPlugin,
-  ListGroupPlugin
+  TablePlugin
 } from "bootstrap-vue";
 
 Vue.filter("date", dateFilter);
 
-Vue.use(LayoutPlugin);
+Vue.use(BadgePlugin);
 Vue.use(ButtonPlugin);
 Vue.use(CollapsePlugin);
-Vue.use(LinkPlugin);
-Vue.use(NavbarPlugin);
-Vue.use(TablePlugin);
-Vue.use(LayoutPlugin);
-Vue.use(ModalPlugin);
-Vue.use(NavPlugin);
-Vue.use(BadgePlugin);
+Vue.use(FormPlugin);
 Vue.use(FormCheckboxPlugin);
+Vue.use(FormGroupPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(LayoutPlugin);
+Vue.use(LayoutPlugin);
+Vue.use(LinkPlugin);
 Vue.use(ListGroupPlugin);
+Vue.use(ModalPlugin);
+Vue.use(NavbarPlugin);
+Vue.use(NavPlugin);
+Vue.use(TablePlugin);
 
 new Vue({
   router,
