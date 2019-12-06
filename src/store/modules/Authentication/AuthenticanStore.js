@@ -3,7 +3,6 @@ import api from "../../api";
 const AuthenticationStore = {
   namespaced: true,
   state: {
-    auth: {},
     status: "",
     token: sessionStorage.getItem("token") || ""
   },
@@ -15,9 +14,8 @@ const AuthenticationStore = {
     authRequest(state) {
       state.status = "loading";
     },
-    authSuccess(state, token, auth) {
+    authSuccess(state, token) {
       state.status = "authenicated";
-      state.auth = auth;
       state.token = token;
     },
     authError(state) {
@@ -37,7 +35,7 @@ const AuthenticationStore = {
           const token = response.data.token;
           sessionStorage.setItem("token", token);
           api.defaults.auth = auth; // TODO Permantent Solution
-          commit("authSuccess", token, auth);
+          commit("authSuccess", token);
         })
         .catch(error => {
           commit("authError");
@@ -48,7 +46,6 @@ const AuthenticationStore = {
     logout({ commit }) {
       commit("logout");
       sessionStorage.removeItem("token");
-      api.defaults.auth = {}; // Permanent solution
     }
   }
 };
