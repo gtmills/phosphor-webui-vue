@@ -9,7 +9,7 @@
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ system.Model || "N/A" }}</dd>
+                <dd>{{ serverModel.Model }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -38,7 +38,7 @@
             <b-col sm="6">
               <dl>
                 <dt>HOSTNAME</dt>
-                <dd>{{ network.config.HostName || "N/A" }}</dd>
+                <dd>{{ hostName }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -101,6 +101,26 @@ export default {
     quickLinks: OverviewQuickLinks,
     events: OverviewEvents
   },
+  created() {
+    this.getServerModel();
+    this.getHostInfo();
+  },
+  computed: {
+    serverModel() {
+      return this.$store.getters["overview/serverModel"];
+    },
+    hostName() {
+      return this.$store.getters["global/hostName"];
+    }
+  },
+  methods: {
+    getServerModel() {
+      this.$store.dispatch("overview/getServerModel");
+    },
+    getHostInfo() {
+      this.$store.dispatch("global/getHostName");
+    }
+  },
   data() {
     return {
       logging: {
@@ -116,9 +136,6 @@ export default {
         }
       },
       network: {
-        config: {
-          HostName: "witherspoon"
-        },
         eth0: {
           MACAddress: "00:00:00:00:00:00"
         },
@@ -134,7 +151,7 @@ export default {
         Version: "IBM-witherspoon-OP9-v2.4-4.22"
       },
       system: {
-        Manufacturer: "",
+        Manufacturer: " ",
         Model: "0000000000000000",
         SerialNumber: "0000000000000000"
       },
