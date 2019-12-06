@@ -29,21 +29,18 @@ export default {
     $route: function() {
       // $nextTick = DOM updated
       this.$nextTick(function() {
-        // set timeout needs a slight delay before referencing the DOM
-        setTimeout(() => {
-          // Get the focusTarget DOM element
-          let focusTarget = this.$refs.focusTarget.$el;
+        // Get the focusTarget DOM element
+        let focusTarget = this.$refs.focusTarget.$el;
 
-          // Make focustarget programmatically focussable
-          focusTarget.setAttribute("tabindex", "-1");
+        // Make focustarget programmatically focussable
+        focusTarget.setAttribute("tabindex", "-1");
 
-          // Focus element
-          focusTarget.focus();
+        // Focus element
+        focusTarget.focus();
 
-          // Remove tabindex from focustarget
-          // Reason: https://axesslab.com/skip-links/#update-3-a-comment-from-gov-uk
-          focusTarget.removeAttribute("tabindex");
-        }, 0);
+        // Remove tabindex from focustarget
+        // Reason: https://axesslab.com/skip-links/#update-3-a-comment-from-gov-uk
+        focusTarget.removeAttribute("tabindex");
       });
     }
   }
