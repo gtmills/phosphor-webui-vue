@@ -3,26 +3,26 @@ import api from "../../api";
 const OverviewStore = {
   namespaced: true,
   state: {
-    serverModel: "--"
+    serverInfo: "N/A"
   },
   getters: {
-    serverModel(state) {
-      return state.serverModel;
+    serverInfo(state) {
+      return state.serverInfo;
     }
   },
   mutations: {
-    setServerModel(state, serverModel) {
-      state.serverModel = serverModel;
+    setServerInfo(state, serverInfo) {
+      state.serverInfo = serverInfo;
     }
   },
   actions: {
-    getServerModel({ commit }) {
+    getServerInfo({ commit }) {
       api
         .get("/xyz/openbmc_project/inventory/system")
         .then(({ data }) => {
           console.log(data);
-          const serverModel = data.data;
-          commit("setServerModel", serverModel);
+          const serverInfo = data.data;
+          commit("setServerInfo", serverInfo);
         })
         .catch(error => {
           console.log(error);
@@ -32,16 +32,3 @@ const OverviewStore = {
 };
 
 export default OverviewStore;
-
-//   "data": {
-//       "AssetTag": "",
-//       "BuildDate": "",
-//       "Cached": false,
-//       "FieldReplaceable": false,
-//       "Manufacturer": "",
-//       "Model": "0000000000000000",
-//       "PartNumber": "",
-//       "Present": true,
-//       "PrettyName": "",
-//       "SerialNumber": "0000000000000000"
-//   }

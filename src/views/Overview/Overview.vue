@@ -9,19 +9,19 @@
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ serverModel.Model }}</dd>
+                <dd>{{ serverInfo.Model }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MANUFACTURER</dt>
-                <dd>{{ system.Manufacturer || "N/A" }}</dd>
+                <dd>{{ serverInfo.Manufacturer || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>SERIAL NUMBER</dt>
-                <dd>{{ system.SerialNumber || "N/A" }}</dd>
+                <dd>{{ serverInfo.SerialNumber }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -102,20 +102,20 @@ export default {
     events: OverviewEvents
   },
   created() {
-    this.getServerModel();
+    this.getServerInfo();
     this.getHostInfo();
   },
   computed: {
-    serverModel() {
-      return this.$store.getters["overview/serverModel"];
+    serverInfo() {
+      return this.$store.getters["overview/serverInfo"];
     },
     hostName() {
       return this.$store.getters["global/hostName"];
     }
   },
   methods: {
-    getServerModel() {
-      this.$store.dispatch("overview/getServerModel");
+    getServerInfo() {
+      this.$store.dispatch("overview/getServerInfo");
     },
     getHostInfo() {
       this.$store.dispatch("global/getHostName");
@@ -149,11 +149,6 @@ export default {
       },
       software: {
         Version: "IBM-witherspoon-OP9-v2.4-4.22"
-      },
-      system: {
-        Manufacturer: " ",
-        Model: "0000000000000000",
-        SerialNumber: "0000000000000000"
       },
       total_power: {
         description: "0"
