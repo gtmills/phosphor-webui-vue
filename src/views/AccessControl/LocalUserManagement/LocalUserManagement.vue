@@ -23,6 +23,7 @@
           <template v-slot:head(actions)="data"></template>
           <template v-slot:cell(actions)="data">
             <b-button
+              aria-label="Edit user"
               variant="link"
               :disabled="!data.value.edit"
               @click="initModalUser(data.item)"
@@ -30,6 +31,7 @@
               <icon-edit />
             </b-button>
             <b-button
+              aria-label="Delete user"
               variant="link"
               :disabled="!data.value.delete"
               @click="initModalDelete(data.item)"
