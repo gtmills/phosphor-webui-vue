@@ -3,49 +3,39 @@ import api from "../../api";
 const AuthenticationStore = {
   namespaced: true,
   state: {
-    status: "",
-    token: sessionStorage.getItem("token") || ""
+    status: ""
   },
   getters: {
     authStatus: state => state.status,
-    isLoggedIn: state => !!state.token
+    isLoggedIn: (_, getters) => getters.authStatus === "authenicated"
   },
   mutations: {
     authRequest(state) {
       state.status = "loading";
     },
-    authSuccess(state, token) {
+    authSuccess(state) {
       state.status = "authenicated";
-      state.token = token;
     },
     authError(state) {
       state.status = "error";
     },
     logout(state) {
       state.status = "";
-      state.token = "";
     }
   },
   actions: {
     login({ commit }, auth) {
       commit("authRequest");
       return api
-        .post("/login", auth)
-        .then(response => {
-          const token = response.data.token;
-          sessionStorage.setItem("token", token);
-          api.defaults.auth = auth; // TODO Permantent Solution
-          commit("authSuccess", token);
-        })
+        .post("/login", { data: auth })
+        .then(() => commit("authSuccess"))
         .catch(error => {
           commit("authError");
-          sessionStorage.removeItem("token");
           throw new Error(error);
         });
     },
     logout({ commit }) {
       commit("logout");
-      sessionStorage.removeItem("token");
     }
   }
 };
