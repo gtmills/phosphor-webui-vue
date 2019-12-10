@@ -7,14 +7,14 @@ const AuthenticationStore = {
   },
   getters: {
     authStatus: state => state.status,
-    isLoggedIn: (_, getters) => getters.authStatus === "authenicated"
+    isLoggedIn: (_, getters) => getters.authStatus === "authenticated"
   },
   mutations: {
     authRequest(state) {
       state.status = "loading";
     },
     authSuccess(state) {
-      state.status = "authenicated";
+      state.status = "authenticated";
     },
     authError(state) {
       state.status = "error";
