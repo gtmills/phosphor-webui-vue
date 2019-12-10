@@ -3,11 +3,12 @@ import api from "../../api";
 const AuthenticationStore = {
   namespaced: true,
   state: {
-    status: ""
+    status: "",
+    cookie: document.cookie
   },
   getters: {
     authStatus: state => state.status,
-    isLoggedIn: (_, getters) => getters.authStatus === "authenticated"
+    isLoggedIn: state => !!state.cookie
   },
   mutations: {
     authRequest(state) {
@@ -15,6 +16,7 @@ const AuthenticationStore = {
     },
     authSuccess(state) {
       state.status = "authenticated";
+      state.cookie = document.cookie;
     },
     authError(state) {
       state.status = "error";
