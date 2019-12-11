@@ -1,6 +1,6 @@
 <template>
   <b-table bordered small head-variant="dark" :items="items" :fields="fields">
-    <template v-slot:cell(admin)="data">
+    <template v-slot:cell(administrator)="data">
       <template v-if="data.value">
         <Checkmark20 />
       </template>
@@ -10,12 +10,12 @@
         <Checkmark20 />
       </template>
     </template>
-    <template v-slot:cell(user)="data">
+    <template v-slot:cell(readonly)="data">
       <template v-if="data.value">
         <Checkmark20 />
       </template>
     </template>
-    <template v-slot:cell(callback)="data">
+    <template v-slot:cell(noaccess)="data">
       <template v-if="data.value">
         <Checkmark20 />
       </template>
@@ -35,81 +35,74 @@ export default {
       items: [
         {
           description: "Configure components managed by this service",
-          admin: true,
+          administrator: true,
           operator: false,
-          user: false,
-          callback: false
+          readonly: false,
+          noaccess: false
         },
         {
           description: "Configure manager resources",
-          admin: true,
+          administrator: true,
           operator: false,
-          user: false,
-          callback: false
+          readonly: false,
+          noaccess: false
         },
         {
           description: "Update password for current user account",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: false
-        },
-        {
-          description: "Update password for current user account",
-          admin: true,
-          operator: true,
-          user: true,
-          callback: false
+          readonly: true,
+          noaccess: false
         },
         {
           description: "Configure users and their accounts",
-          admin: true,
+          administrator: true,
           operator: false,
-          user: false,
-          callback: false
+          readonly: false,
+          noaccess: false
         },
         {
           description: "Log in to the service and read resources",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: false
+          readonly: true,
+          noaccess: false
         },
         {
           description: "IPMI access point",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: true
+          readonly: true,
+          noaccess: true
         },
         {
           description: "Redfish access point",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: false
+          readonly: true,
+          noaccess: false
         },
         {
           description: "SSH access point",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: false
+          readonly: true,
+          noaccess: false
         },
         {
           description: "WebUI access point",
-          admin: true,
+          administrator: true,
           operator: true,
-          user: true,
-          callback: false
+          readonly: true,
+          noaccess: false
         }
       ],
       fields: [
         { key: "description", label: "" },
-        { key: "admin", label: "Admin", class: "text-center" },
+        { key: "administrator", label: "Administrator", class: "text-center" },
         { key: "operator", label: "Operator", class: "text-center" },
-        { key: "user", label: "User", class: "text-center" },
-        { key: "callback", label: "Callback", class: "text-center" }
+        { key: "readonly", label: "ReadOnly", class: "text-center" },
+        { key: "noaccess", label: "NoAccess", class: "text-center" }
       ]
     };
   }
