@@ -5,6 +5,7 @@ import GlobalStore from "./modules/GlobalStore";
 import AuthenticationStore from "./modules/Authentication/AuthenticanStore";
 import LocalUserManagementStore from "./modules/AccessControl/LocalUserMangementStore";
 import OverviewStore from "./modules/Overview/OverviewStore";
+import FirmwareStore from "./modules/Configuration/FirmwareStore";
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     global: GlobalStore,
     authentication: AuthenticationStore,
     localUsers: LocalUserManagementStore,
-    overview: OverviewStore
+    overview: OverviewStore,
+    firmware: FirmwareStore
   }
 });

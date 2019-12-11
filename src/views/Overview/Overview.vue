@@ -9,7 +9,7 @@
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ serverInfo.Model }}</dd>
+                <dd>{{ serverInfo.Model || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -21,13 +21,13 @@
             <b-col sm="6">
               <dl>
                 <dt>SERIAL NUMBER</dt>
-                <dd>{{ serverInfo.SerialNumber }}</dd>
+                <dd>{{ serverInfo.SerialNumber || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ software.Version || "N/A" }}</dd>
+                <dd>{{ hostActiveVersion || "N/A" }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -38,7 +38,7 @@
             <b-col sm="6">
               <dl>
                 <dt>HOSTNAME</dt>
-                <dd>{{ hostName }}</dd>
+                <dd>{{ bmcActiveVersion || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -104,6 +104,7 @@ export default {
   created() {
     this.getServerInfo();
     this.getHostInfo();
+    this.getFirmwareInfo();
   },
   computed: {
     serverInfo() {
@@ -111,6 +112,12 @@ export default {
     },
     hostName() {
       return this.$store.getters["global/hostName"];
+    },
+    hostActiveVersion() {
+      return this.$store.getters["firmware/hostActiveVersion"];
+    },
+    bmcActiveVersion() {
+      return this.$store.getters["firmware/bmcActiveVersion"];
     }
   },
   methods: {
@@ -119,6 +126,9 @@ export default {
     },
     getHostInfo() {
       this.$store.dispatch("global/getHostName");
+    },
+    getFirmwareInfo() {
+      this.$store.dispatch("firmware/getFirmwareInfo");
     }
   },
   data() {
@@ -146,9 +156,6 @@ export default {
       power_cap: {
         PowerCap: 0,
         PowerCapEnable: false
-      },
-      software: {
-        Version: "IBM-witherspoon-OP9-v2.4-4.22"
       },
       total_power: {
         description: "0"

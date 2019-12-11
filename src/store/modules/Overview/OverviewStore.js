@@ -3,7 +3,7 @@ import api from "../../api";
 const OverviewStore = {
   namespaced: true,
   state: {
-    serverInfo: "N/A"
+    serverInfo: "--"
   },
   getters: {
     serverInfo(state) {
@@ -20,7 +20,6 @@ const OverviewStore = {
       api
         .get("/xyz/openbmc_project/inventory/system")
         .then(({ data }) => {
-          console.log(data);
           const serverInfo = data.data;
           commit("setServerInfo", serverInfo);
         })
