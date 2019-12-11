@@ -1,10 +1,11 @@
 import api from "../../api";
+import Cookies from "js-cookie";
 
 const AuthenticationStore = {
   namespaced: true,
   state: {
     status: "",
-    cookie: document.cookie
+    cookie: Cookies.get("XSRF-TOKEN")
   },
   getters: {
     authStatus: state => state.status,
@@ -16,13 +17,14 @@ const AuthenticationStore = {
     },
     authSuccess(state) {
       state.status = "authenticated";
-      state.cookie = document.cookie;
+      state.cookie = Cookies.get("XSRF-TOKEN");
     },
     authError(state) {
       state.status = "error";
     },
     logout(state) {
       state.status = "";
+      Cookies.remove("XSRF-TOKEN");
     }
   },
   actions: {
@@ -37,7 +39,10 @@ const AuthenticationStore = {
         });
     },
     logout({ commit }) {
-      commit("logout");
+      api
+        .post("/logout", { data: [] })
+        .then(() => commit("logout"))
+        .catch(error => console.log(error));
     }
   }
 };
