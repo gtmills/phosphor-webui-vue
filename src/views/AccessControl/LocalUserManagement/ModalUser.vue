@@ -50,7 +50,7 @@ export default {
   props: ["user"],
   data() {
     return {
-      privilegeTypes: ["Administrator", "Operator", "ReadOnly", "Callback"]
+      privilegeTypes: ["Administrator", "Operator", "ReadOnly", "NoAccess"]
     };
   },
   computed: {
