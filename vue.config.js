@@ -7,14 +7,10 @@ module.exports = {
           if (proxyRes.headers["set-cookie"]) {
             // Need to remove 'Secure' flag on set-cookie value so browser
             // can create cookie for local development
-            proxyRes.headers["set-cookie"].forEach((cookie, index, array) => {
-              const newCookie = cookie
-                .split(";")
-                .map(value => value.trim())
-                .filter(value => value !== "Secure")
-                .join(";");
-              array[index] = newCookie;
-            });
+            const cookies = proxyRes.headers["set-cookie"].map(cookie =>
+              cookie.replace(/; secure/gi, "")
+            );
+            proxyRes.headers["set-cookie"] = cookies;
           }
         }
       }
