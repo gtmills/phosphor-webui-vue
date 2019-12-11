@@ -27,7 +27,7 @@ const LocalUserManagementStore = {
         })
         .catch(error => console.log(error));
     },
-    createUser(_, { username, password, privilege, status }) {
+    createUser({ dispatch }, { username, password, privilege, status }) {
       const data = {
         UserName: username,
         Password: password,
@@ -36,10 +36,13 @@ const LocalUserManagementStore = {
       };
       api
         .post("/redfish/v1/AccountService/Accounts", data)
-        .then(() => this.dispatch("localUsers/getUsers"))
+        .then(() => dispatch("getUsers"))
         .catch(error => console.log(error));
     },
-    updateUser(_, { originalUsername, username, password, privilege, status }) {
+    updateUser(
+      { dispatch },
+      { originalUsername, username, password, privilege, status }
+    ) {
       const data = {};
       if (username) data.UserName = username;
       if (password) data.Password = password;
@@ -47,13 +50,13 @@ const LocalUserManagementStore = {
       if (status !== undefined) data.Enabled = status;
       api
         .patch(`/redfish/v1/AccountService/Accounts/${originalUsername}`, data)
-        .then(() => this.dispatch("localUsers/getUsers"))
+        .then(() => dispatch("getUsers"))
         .catch(error => console.log(error));
     },
-    deleteUser(_, username) {
+    deleteUser({ dispatch }, username) {
       api
         .delete(`/redfish/v1/AccountService/Accounts/${username}`)
-        .then(() => this.dispatch("localUsers/getUsers"))
+        .then(() => dispatch("getUsers"))
         .catch(error => console.log(error));
     }
   }
