@@ -67,7 +67,7 @@
             <b-col sm="6">
               <dl>
                 <dt>POWER CONSUMPTION</dt>
-                <dd>{{ total_power.description || "N/A" }}</dd>
+                <dd>{{ powerData || "N/A" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -105,6 +105,7 @@ export default {
     this.getServerInfo();
     this.getHostInfo();
     this.getFirmwareInfo();
+    this.getPowerData();
   },
   computed: {
     serverInfo() {
@@ -118,6 +119,9 @@ export default {
     },
     bmcActiveVersion() {
       return this.$store.getters["firmware/bmcActiveVersion"];
+    },
+    powerData() {
+      return this.$store.getters["powerConsumption/powerData"];
     }
   },
   methods: {
@@ -129,6 +133,9 @@ export default {
     },
     getFirmwareInfo() {
       this.$store.dispatch("firmware/getFirmwareInfo");
+    },
+    getPowerData() {
+      this.$store.dispatch("power/getPowerData");
     }
   },
   data() {
@@ -156,9 +163,6 @@ export default {
       power_cap: {
         PowerCap: 0,
         PowerCapEnable: false
-      },
-      total_power: {
-        description: "0"
       }
     };
   }
