@@ -1,12 +1,12 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import GlobalStore from "./modules/GlobalStore";
-import AuthenticationStore from "./modules/Authentication/AuthenticanStore";
-import LocalUserManagementStore from "./modules/AccessControl/LocalUserMangementStore";
-import OverviewStore from "./modules/Overview/OverviewStore";
-import FirmwareStore from "./modules/Configuration/FirmwareStore";
-import PowerConsumptionStore from "./modules/Control/PowerConsumptionStore";
+import GlobalStore from './modules/GlobalStore';
+import AuthenticationStore from './modules/Authentication/AuthenticanStore';
+import LocalUserManagementStore from './modules/AccessControl/LocalUserMangementStore';
+import OverviewStore from './modules/Overview/OverviewStore';
+import FirmwareStore from './modules/Configuration/FirmwareStore';
+import PowerConsumptionStore from './modules/Control/PowerConsumptionStore';
 
 Vue.use(Vuex);
 

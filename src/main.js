@@ -1,8 +1,8 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import { dateFilter } from "vue-date-fns";
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { dateFilter } from 'vue-date-fns';
 import {
   BadgePlugin,
   ButtonPlugin,
@@ -11,6 +11,8 @@ import {
   FormCheckboxPlugin,
   FormGroupPlugin,
   FormInputPlugin,
+  FormRadioPlugin,
+  FormSelectPlugin,
   LayoutPlugin,
   LinkPlugin,
   ListGroupPlugin,
@@ -18,9 +20,9 @@ import {
   NavbarPlugin,
   NavPlugin,
   TablePlugin
-} from "bootstrap-vue";
+} from 'bootstrap-vue';
 
-Vue.filter("date", dateFilter);
+Vue.filter('date', dateFilter);
 
 Vue.use(BadgePlugin);
 Vue.use(ButtonPlugin);
@@ -29,6 +31,8 @@ Vue.use(FormPlugin);
 Vue.use(FormCheckboxPlugin);
 Vue.use(FormGroupPlugin);
 Vue.use(FormInputPlugin);
+Vue.use(FormRadioPlugin);
+Vue.use(FormSelectPlugin);
 Vue.use(LayoutPlugin);
 Vue.use(LayoutPlugin);
 Vue.use(LinkPlugin);
@@ -42,4 +46,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app');

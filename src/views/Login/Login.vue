@@ -27,7 +27,7 @@
           <b-form-group
             id="password-group"
             label="Password"
-            label-for="username"
+            label-for="password"
           >
             <b-form-input
               id="password"
@@ -59,7 +59,7 @@ export default {
       const username = this.username;
       const password = this.password;
       this.$store
-        .dispatch("authentication/login", { username, password })
+        .dispatch("authentication/login", [username, password])
         .then(() => this.$router.push("/"))
         .catch(error => console.log(error));
     }
