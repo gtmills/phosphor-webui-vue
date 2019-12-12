@@ -1,9 +1,9 @@
-import api from "../../api";
+import api from '../../api';
 
 const PowerConsumptionStore = {
   namespaced: true,
   state: {
-    powerData: "--"
+    powerData: '--'
   },
   getters: {
     powerData(state) {
@@ -18,12 +18,12 @@ const PowerConsumptionStore = {
   actions: {
     getPowerData({ commit }) {
       api
-        .get("/xyz/openbmc_project/sensors/power/total_power")
+        .get('/xyz/openbmc_project/sensors/power/total_power')
         .then(({ data }) => {
           const powerData = data.data;
           console.log(powerData.Value);
 
-          commit("getPowerData", powerData);
+          commit('getPowerData', powerData);
         })
         .catch(error => {
           console.log(error);

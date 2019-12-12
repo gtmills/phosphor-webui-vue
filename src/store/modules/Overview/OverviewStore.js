@@ -1,9 +1,9 @@
-import api from "../../api";
+import api from '../../api';
 
 const OverviewStore = {
   namespaced: true,
   state: {
-    serverInfo: "--"
+    serverInfo: '--'
   },
   getters: {
     serverInfo(state) {
@@ -18,10 +18,10 @@ const OverviewStore = {
   actions: {
     getServerInfo({ commit }) {
       api
-        .get("/xyz/openbmc_project/inventory/system")
+        .get('/xyz/openbmc_project/inventory/system')
         .then(({ data }) => {
           const serverInfo = data.data;
-          commit("setServerInfo", serverInfo);
+          commit('setServerInfo', serverInfo);
         })
         .catch(error => {
           console.log(error);
