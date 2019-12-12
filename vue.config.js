@@ -1,4 +1,4 @@
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   devServer: {
@@ -21,7 +21,7 @@ module.exports = {
   },
   productionSourceMap: false,
   configureWebpack: config => {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new CompressionPlugin({
           deleteOriginalAssets: true
@@ -30,9 +30,9 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    if (process.env.NODE_ENV === "production") {
-      config.plugins.delete("prefetch");
-      config.plugins.delete("preload");
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.delete('prefetch');
+      config.plugins.delete('preload');
     }
   }
 };
