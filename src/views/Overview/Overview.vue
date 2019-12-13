@@ -73,8 +73,7 @@
             <b-col sm="6">
               <dl>
                 <dt>POWER CAP</dt>
-                <dd v-if="!power_cap.PowerCapEnable">Not enabled</dd>
-                <dd v-else>{{ power_cap.PowerCap }}</dd>
+                <dd>{{ powerCapValue }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -106,6 +105,7 @@ export default {
     this.getHostInfo();
     this.getFirmwareInfo();
     this.getPowerData();
+    this.getPowerCapData();
   },
   computed: {
     serverInfo() {
@@ -122,6 +122,9 @@ export default {
     },
     powerConsumption() {
       return this.$store.getters["power/powerConsumption"];
+    },
+    powerCapValue() {
+      return this.$store.getters["powerCap/powerCapValue"];
     }
   },
   methods: {
@@ -136,6 +139,9 @@ export default {
     },
     getPowerData() {
       this.$store.dispatch("power/getPowerData");
+    },
+    getPowerCapData() {
+      this.$store.dispatch("powerCap/getPowerCapData");
     }
   },
   data() {
@@ -159,10 +165,6 @@ export default {
         ipv4: {
           Address: "00.00.00.00"
         }
-      },
-      power_cap: {
-        PowerCap: 0,
-        PowerCapEnable: false
       }
     };
   }

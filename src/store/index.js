@@ -7,6 +7,7 @@ import LocalUserManagementStore from './modules/AccessControl/LocalUserMangement
 import OverviewStore from './modules/Overview/OverviewStore';
 import FirmwareStore from './modules/Configuration/FirmwareStore';
 import PowerConsumptionStore from './modules/Control/PowerConsumptionStore';
+import PowerCapStore from './modules/Control/PoweCapStore';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     localUsers: LocalUserManagementStore,
     overview: OverviewStore,
     firmware: FirmwareStore,
-    power: PowerConsumptionStore
+    power: PowerConsumptionStore,
+    powerCap: PowerCapStore
   }
 });
