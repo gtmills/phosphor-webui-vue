@@ -34,7 +34,7 @@ const PowerConsumptionStore = {
           commit('setPowerConsumption', powerConsumption);
         })
         .catch(error => {
-          console.log('Powerconsumption', error);
+          console.log('Power Consumption', error);
           let powerConsumption = 'Not available';
           commit('setPowerConsumption', powerConsumption);
         });

@@ -44,7 +44,7 @@
             <b-col sm="6">
               <dl>
                 <dt>MAC ADDRESS</dt>
-                <dd>{{ network.eth0.MACAddress || "N/A" }}</dd>
+                <dd>{{ networkData }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -106,6 +106,7 @@ export default {
     this.getFirmwareInfo();
     this.getPowerData();
     this.getPowerCapData();
+    this.getNetworkData();
   },
   computed: {
     serverInfo() {
@@ -125,6 +126,9 @@ export default {
     },
     powerCapValue() {
       return this.$store.getters["powerCap/powerCapValue"];
+    },
+    networkData() {
+      return this.$store.getters["networkSettings/networkData"];
     }
   },
   methods: {
@@ -142,6 +146,9 @@ export default {
     },
     getPowerCapData() {
       this.$store.dispatch("powerCap/getPowerCapData");
+    },
+    getNetworkData() {
+      this.$store.dispatch("networkSettings/getNetworkData");
     }
   },
   data() {

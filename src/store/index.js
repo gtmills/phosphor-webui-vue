@@ -8,6 +8,7 @@ import OverviewStore from './modules/Overview/OverviewStore';
 import FirmwareStore from './modules/Configuration/FirmwareStore';
 import PowerConsumptionStore from './modules/Control/PowerConsumptionStore';
 import PowerCapStore from './modules/Control/PoweCapStore';
+import NetworkSettingStore from './modules/Configuration/NetworkSettingsStore';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     overview: OverviewStore,
     firmware: FirmwareStore,
     powerConsumption: PowerConsumptionStore,
-    powerCap: PowerCapStore
+    powerCap: PowerCapStore,
+    networkSettings: NetworkSettingStore
   }
 });
