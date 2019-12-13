@@ -3,16 +3,23 @@ import api from '../../api';
 const PowerConsumptionStore = {
   namespaced: true,
   state: {
-    powerData: '--'
+    powerData: null,
+    powerConsumption: '--'
   },
   getters: {
     powerData(state) {
       return state.powerData;
+    },
+    powerConsumption(state) {
+      return state.powerConsumption;
     }
   },
   mutations: {
     setPowerData(state, powerData) {
       state.powerData = powerData;
+    },
+    setPowerConsumption(state, powerConsumption) {
+      state.powerConsumption = powerConsumption;
     }
   },
   actions: {
@@ -21,12 +28,15 @@ const PowerConsumptionStore = {
         .get('/xyz/openbmc_project/sensors/power/total_power')
         .then(({ data }) => {
           const powerData = data.data;
-          console.log(powerData.Value);
+          let powerConsumption =
+            powerData.Value * Math.pow(10, powerData.Scale) + ' W';
 
-          commit('getPowerData', powerData);
+          commit('setPowerConsumption', powerConsumption);
         })
         .catch(error => {
-          console.log(error);
+          console.log('Powerconsumption', error);
+          let powerConsumption = 'Not available';
+          commit('setPowerConsumption', powerConsumption);
         });
     }
   }

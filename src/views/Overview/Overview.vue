@@ -67,7 +67,7 @@
             <b-col sm="6">
               <dl>
                 <dt>POWER CONSUMPTION</dt>
-                <dd>{{ powerData || "N/A" }}</dd>
+                <dd>{{ powerConsumption }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -120,8 +120,8 @@ export default {
     bmcActiveVersion() {
       return this.$store.getters["firmware/bmcActiveVersion"];
     },
-    powerData() {
-      return this.$store.getters["powerConsumption/powerData"];
+    powerConsumption() {
+      return this.$store.getters["power/powerConsumption"];
     }
   },
   methods: {
