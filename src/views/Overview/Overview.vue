@@ -107,6 +107,7 @@ export default {
     this.getPowerData();
     this.getPowerCapData();
     this.getNetworkData();
+    this.getEventLogData();
   },
   computed: {
     serverInfo() {
@@ -129,6 +130,9 @@ export default {
     },
     networkData() {
       return this.$store.getters["networkSettings/networkData"];
+    },
+    eventLogData() {
+      return this.$store.getters["eventLog/eventLogData"];
     }
   },
   methods: {
@@ -149,6 +153,9 @@ export default {
     },
     getNetworkData() {
       this.$store.dispatch("networkSettings/getNetworkData");
+    },
+    getEventLogData() {
+      this.$store.dispatch("eventLog/getEventLogData");
     }
   },
   data() {

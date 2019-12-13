@@ -9,6 +9,7 @@ import FirmwareStore from './modules/Configuration/FirmwareStore';
 import PowerConsumptionStore from './modules/Control/PowerConsumptionStore';
 import PowerCapStore from './modules/Control/PoweCapStore';
 import NetworkSettingStore from './modules/Configuration/NetworkSettingsStore';
+import EventLogStore from './modules/Health/EventLogStore';
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     firmware: FirmwareStore,
     powerConsumption: PowerConsumptionStore,
     powerCap: PowerCapStore,
-    networkSettings: NetworkSettingStore
+    networkSettings: NetworkSettingStore,
+    eventLog: EventLogStore
   }
 });
