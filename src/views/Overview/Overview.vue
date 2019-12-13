@@ -121,7 +121,7 @@ export default {
       return this.$store.getters["firmware/bmcActiveVersion"];
     },
     powerConsumption() {
-      return this.$store.getters["power/powerConsumption"];
+      return this.$store.getters["powerConsumption/powerConsumption"];
     },
     powerCapValue() {
       return this.$store.getters["powerCap/powerCapValue"];
@@ -138,7 +138,7 @@ export default {
       this.$store.dispatch("firmware/getFirmwareInfo");
     },
     getPowerData() {
-      this.$store.dispatch("power/getPowerData");
+      this.$store.dispatch("powerConsumption/getPowerData");
     },
     getPowerCapData() {
       this.$store.dispatch("powerCap/getPowerCapData");

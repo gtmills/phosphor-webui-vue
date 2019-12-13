@@ -21,7 +21,7 @@ export default new Vuex.Store({
     localUsers: LocalUserManagementStore,
     overview: OverviewStore,
     firmware: FirmwareStore,
-    power: PowerConsumptionStore,
+    powerConsumption: PowerConsumptionStore,
     powerCap: PowerCapStore
   }
 });
