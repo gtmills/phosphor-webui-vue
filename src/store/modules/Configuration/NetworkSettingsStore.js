@@ -4,8 +4,8 @@ const NetworkSettingsStore = {
   namespaced: true,
   state: {
     networkData: null,
-    ipAddress: 'N/A',
-    macAddress: 'N/A'
+    ipAddress: '--',
+    macAddress: '--'
   },
   getters: {
     networkData(state) {
@@ -104,7 +104,6 @@ const NetworkSettingsStore = {
           );
 
           commit('setIpAddress', parsedNetworkData.ip_addresses.ipv4);
-          console.log(parsedNetworkData.ip_addresses.ipv4);
         })
         .catch(error => {
           console.log('Network Data:', error);

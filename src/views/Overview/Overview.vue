@@ -4,30 +4,30 @@
     <b-row>
       <b-col lg="8" sm="12">
         <section>
-          <h2>Server Information</h2>
+          <h2>Server information</h2>
           <b-row>
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ serverInfo.Model || "N/A" }}</dd>
+                <dd>{{ serverInfo.Model || "--" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MANUFACTURER</dt>
-                <dd>{{ serverInfo.Manufacturer || "N/A" }}</dd>
+                <dd>{{ serverInfo.Manufacturer || "--" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>SERIAL NUMBER</dt>
-                <dd>{{ serverInfo.SerialNumber || "N/A" }}</dd>
+                <dd>{{ serverInfo.SerialNumber || "--" }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ hostActiveVersion || "N/A" }}</dd>
+                <dd>{{ hostActiveVersion }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -50,9 +50,8 @@
             <b-col sm="6">
               <dl>
                 <dt>IP ADDRESS</dt>
-                <dd>
-                  {{ ipAddress[0] }} <br />
-                  {{ ipAddress[1] }}
+                <dd v-for="ipAddress in ipAddress" v-bind:key="ipAddress.id">
+                  {{ ipAddress }}
                 </dd>
               </dl>
             </b-col>

@@ -22,8 +22,6 @@ const EventLogStore = {
         .then(({ data }) => {
           const eventLogData = JSON.stringify(data.data);
 
-          console.log('event log data', eventLogData);
-
           // TODO: Parse event log data for events
           commit('setEventLogData', eventLogData);
         })
