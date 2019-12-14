@@ -36,18 +36,15 @@ const NetworkSettingsStore = {
         .then(({ data }) => {
           const networkData = JSON.stringify(data.data);
           const networkDataContent = JSON.parse(networkData);
-
           let parsedNetworkData = {
             interface_ids: [],
             interfaces: {},
             ip_addresses: { ipv4: [], ipv6: [] }
           };
-
           let interfaceId = '',
             keyParts = [],
             interfaceHash = '',
             interfaceType = '';
-
           for (let key in networkDataContent) {
             if (key.match(/network\/eth\d+(_\d+)?$/gi)) {
               interfaceId = key.split('/').pop();
@@ -79,7 +76,6 @@ const NetworkSettingsStore = {
               interfaceHash = keyParts.pop();
               interfaceType = keyParts.pop();
               interfaceId = keyParts.pop();
-
               if (
                 parsedNetworkData.interfaces[interfaceId][
                   interfaceType
@@ -97,12 +93,10 @@ const NetworkSettingsStore = {
               }
             }
           }
-
           commit(
             'setMacAddress',
             networkDataContent['/xyz/openbmc_project/network/eth0'].MACAddress
           );
-
           commit('setIpAddress', parsedNetworkData.ip_addresses.ipv4);
         })
         .catch(error => {

@@ -37,10 +37,8 @@ const FirmwareStore = {
           const firmwareInfo = data.data;
           const json = JSON.stringify(firmwareInfo);
           const content = JSON.parse(json);
-
           const functionalImages =
             content['/xyz/openbmc_project/software/functional'].endpoints;
-
           for (let key in content) {
             if (
               content.hasOwnProperty(key) &&
@@ -53,11 +51,9 @@ const FirmwareStore = {
               if (content[key].Activation) {
                 activationStatus = content[key].Activation.split('.').pop();
               }
-
               if (functionalImages.includes(key)) {
                 activationStatus = 'Functional';
               }
-
               let data = [];
               data.push(
                 Object.assign(
@@ -70,13 +66,11 @@ const FirmwareStore = {
                   content[key]
                 )
               );
-
               // Get BMC and Host active Versions
               const imageType = content[key].Purpose.split('.').pop();
               if (activationStatus == 'Functional' && imageType == 'BMC') {
                 commit('setBmcActiveVersion', content[key].Version);
               }
-
               if (activationStatus == 'Functional' && imageType == 'Host') {
                 commit('setHostActiveVersion', content[key].Version);
               }

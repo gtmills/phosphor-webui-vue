@@ -38,14 +38,12 @@ const EventLogStore = {
             Debug: 'Low',
             Informational: 'Low'
           };
-
           for (let key in eventLogContent) {
             let severityCode = '';
             let priority = '';
             let relatedItems = [];
             let eventID = 'None';
             let description = 'None';
-
             if (
               eventLogContent.hasOwnProperty(key) &&
               eventLogContent[key].hasOwnProperty('Id')
@@ -53,21 +51,17 @@ const EventLogStore = {
               severityCode = eventLogContent[key].Severity.split('.').pop();
               priority = severityToPriorityMap[severityCode];
               severityFlags[priority.toLowerCase()] = true;
-
               if (eventLogContent[key].hasOwnProperty(['Associations'])) {
                 eventLogContent[key].Associations.forEach(function(item) {
                   relatedItems.push(item[2]);
                 });
               }
-
               if (eventLogContent[key].hasOwnProperty(['EventID'])) {
                 eventID = eventLogContent[key].EventID;
               }
-
               if (eventLogContent[key].hasOwnProperty(['Description'])) {
                 description = eventLogContent[key].Description;
               }
-
               eventLogData.push(
                 Object.assign(
                   {

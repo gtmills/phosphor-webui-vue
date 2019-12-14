@@ -30,7 +30,6 @@ const PowerConsumptionStore = {
           const powerData = data.data;
           let powerConsumption =
             powerData.Value * Math.pow(10, powerData.Scale) + ' W';
-
           commit('setPowerConsumption', powerConsumption);
         })
         .catch(error => {
