@@ -38,25 +38,28 @@
             <b-col sm="6">
               <dl>
                 <dt>HOSTNAME</dt>
-                <dd>{{ bmcActiveVersion || "N/A" }}</dd>
+                <dd>{{ hostName }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MAC ADDRESS</dt>
-                <dd>{{ networkData }}</dd>
+                <dd>{{ macAddress }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>IP ADDRESS</dt>
-                <dd>{{ network.ipv4.Address || "N/A" }}</dd>
+                <dd>
+                  {{ ipAddress[0] }} <br />
+                  {{ ipAddress[1] }}
+                </dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ logging.entry.Version || "N/A" }}</dd>
+                <dd>{{ bmcActiveVersion }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -128,8 +131,11 @@ export default {
     powerCapValue() {
       return this.$store.getters["powerCap/powerCapValue"];
     },
-    networkData() {
-      return this.$store.getters["networkSettings/networkData"];
+    ipAddress() {
+      return this.$store.getters["networkSettings/ipAddress"];
+    },
+    macAddress() {
+      return this.$store.getters["networkSettings/macAddress"];
     },
     eventLogData() {
       return this.$store.getters["eventLog/eventLogData"];
@@ -170,14 +176,6 @@ export default {
           Severity: "xyz.openbmc_project.Logging.Entry.Level.Error",
           Timestamp: 1574782085071,
           Version: "ibm-v2.7.0-rc1-5-gfd9b55f-r19-1-g8c075d3"
-        }
-      },
-      network: {
-        eth0: {
-          MACAddress: "00:00:00:00:00:00"
-        },
-        ipv4: {
-          Address: "00.00.00.00"
         }
       }
     };
