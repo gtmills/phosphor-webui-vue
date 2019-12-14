@@ -50,9 +50,7 @@
             <b-col sm="6">
               <dl>
                 <dt>IP ADDRESS</dt>
-                <dd v-for="ipAddress in ipAddress" v-bind:key="ipAddress.id">
-                  {{ ipAddress }}
-                </dd>
+                <dd v-for="ip in ipAddress" v-bind:key="ip.id">{{ ip }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -135,9 +133,6 @@ export default {
     },
     macAddress() {
       return this.$store.getters["networkSettings/macAddress"];
-    },
-    eventLogData() {
-      return this.$store.getters["eventLog/eventLogData"];
     }
   },
   methods: {
@@ -162,22 +157,6 @@ export default {
     getEventLogData() {
       this.$store.dispatch("eventLog/getEventLogData");
     }
-  },
-  data() {
-    return {
-      logging: {
-        entry: {
-          Description:
-            "An internal failure has occurred while performing an operation.",
-          EventID: "FQPSPCR0021F",
-          Id: 1,
-          Resolved: false,
-          Severity: "xyz.openbmc_project.Logging.Entry.Level.Error",
-          Timestamp: 1574782085071,
-          Version: "ibm-v2.7.0-rc1-5-gfd9b55f-r19-1-g8c075d3"
-        }
-      }
-    };
   }
 };
 </script>

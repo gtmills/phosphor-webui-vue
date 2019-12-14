@@ -1,19 +1,19 @@
 <template>
-  <b-list-group>
-    <b-list-group-item href="#" class="flex-column align-items-start">
-      #{{ logging.entry.Id }}
-      <b-badge variant="danger">{{ logging.entry.Severity }}</b-badge>
-      <div class="d-flex w-100 justify-content-between">
-        <small>{{
-          logging.entry.Timestamp | date("MMM, DD YYYY HH:MM:SS A ZZ")
-        }}</small>
-        <ChevronRight16 />
-      </div>
-      <p class="mb-1">
-        {{ logging.entry.EventID }}: {{ logging.entry.Description }}
-      </p>
-    </b-list-group-item>
-  </b-list-group>
+  <div>
+    <b-list-group v-for="logData in eventLogData" :key="logData.id">
+      <b-list-group-item href="#" class="flex-column align-items-start">
+        {{ logData.logId }}
+        <b-badge variant="danger">{{ logData.severity_code }}</b-badge>
+        <div class="d-flex w-100 justify-content-between">
+          <small>{{
+            logData.Timestamp | date("MMM DD YYYY HH:MM:SS A ZZ")
+          }}</small>
+          <ChevronRight16 />
+        </div>
+        <p class="mb-1">{{ logData.eventID }}: {{ logData.description }}</p>
+      </b-list-group-item>
+    </b-list-group>
+  </div>
 </template>
 
 <script>
@@ -24,20 +24,18 @@ export default {
   components: {
     ChevronRight16
   },
-  data() {
-    return {
-      logging: {
-        entry: {
-          Description:
-            "An internal failure has occurred while performing an operation.",
-          EventID: "FQPSPCR0021F",
-          Id: 1,
-          Resolved: false,
-          Severity: "Error",
-          Timestamp: 1574782085071
-        }
-      }
-    };
+  created() {
+    this.getEventLogData();
+  },
+  computed: {
+    eventLogData() {
+      return this.$store.getters["eventLog/eventLogData"];
+    }
+  },
+  methods: {
+    getEventLogData() {
+      this.$store.dispatch("eventLog/getEventLogData");
+    }
   }
 };
 </script>
