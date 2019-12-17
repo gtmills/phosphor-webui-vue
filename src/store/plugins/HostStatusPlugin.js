@@ -30,6 +30,8 @@ const HostStatusPlugin = store => {
       if (ws) ws.close();
     }
   });
+
+  if (store.getters['authentication/isLoggedIn']) initWebSocket();
 };
 
 export default HostStatusPlugin;
