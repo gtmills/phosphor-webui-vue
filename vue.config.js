@@ -6,7 +6,6 @@ module.exports = {
     proxy: {
       '/': {
         target: process.env.BASE_URL,
-        ws: true,
         onProxyRes: proxyRes => {
           // This header is igorned in the browser so removing
           // it so we don't see warnings in the browser console
