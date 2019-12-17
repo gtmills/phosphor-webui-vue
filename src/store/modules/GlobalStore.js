@@ -18,7 +18,6 @@ const hostStateMapper = hostState => {
       return 'Off';
     case HOST_STATE.error:
       return 'Error';
-    case HOST_STATE.transition.on:
     case HOST_STATE.transition.reboot:
       return 'Rebooting';
     default:
@@ -44,8 +43,8 @@ const GlobalStore = {
     setHostName(state, hostName) {
       state.hostName = hostName;
     },
-    setHostStatus(state, hostStatus) {
-      state.hostStatus = hostStateMapper(hostStatus);
+    setHostStatus(state, hostState) {
+      state.hostStatus = hostStateMapper(hostState);
     }
   },
   actions: {
@@ -62,8 +61,8 @@ const GlobalStore = {
       api
         .get('/xyz/openbmc_project/state/host0/attr/CurrentHostState')
         .then(response => {
-          const hostStatus = response.data.data;
-          commit('setHostStatus', hostStatus);
+          const hostState = response.data.data;
+          commit('setHostStatus', hostState);
         })
         .catch(error => console.log(error));
     }
