@@ -1,15 +1,10 @@
 <template>
   <b-list-group>
-    <b-list-group-item
-      href="#"
-      variant="danger"
-      v-show="logging.entry.Severity === 'Error'"
-      >View 1 high priority event</b-list-group-item
-    >
+    <!-- TODO: add event log priority events count -->
     <b-list-group-item>
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmc.Elapsed | date("MMM, DD YYYY HH:MM:SS A ZZ") }}</dd>
+        <dd>{{ bmcTime | date("MMM, DD YYYY HH:MM:SS A ZZ") }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item>
@@ -47,18 +42,18 @@ export default {
   components: {
     ChevronRight16
   },
-  data() {
-    return {
-      bmc: {
-        Elapsed: 1574782085071
-      },
-      logging: {
-        entry: {
-          Severity: "Error"
-        }
-      },
-      checked: false
-    };
+  created() {
+    this.getBmcTime();
+  },
+  computed: {
+    bmcTime() {
+      return this.$store.getters["global/bmcTime"];
+    }
+  },
+  methods: {
+    getBmcTime() {
+      this.$store.dispatch("global/getBmcTime");
+    }
   }
 };
 </script>

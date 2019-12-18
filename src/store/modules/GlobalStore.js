@@ -4,7 +4,8 @@ const GlobalStore = {
   namespaced: true,
   state: {
     hostName: '--',
-    hostStatus: null
+    hostStatus: null,
+    bmcTime: '--'
   },
   getters: {
     hostName(state) {
@@ -12,11 +13,17 @@ const GlobalStore = {
     },
     hostStatus(state) {
       return state.hostStatus;
+    },
+    bmcTime(state) {
+      return state.bmcTime;
     }
   },
   mutations: {
     setHostName(state, hostName) {
       state.hostName = hostName;
+    },
+    setBmcTime(state, bmcTime) {
+      state.bmcTime = bmcTime;
     }
   },
   actions: {
@@ -26,6 +33,15 @@ const GlobalStore = {
         .then(response => {
           const hostName = response.data.data;
           commit('setHostName', hostName);
+        })
+        .catch(error => console.log(error));
+    },
+    getBmcTime({ commit }) {
+      api
+        .get('/xyz/openbmc_project/time/bmc')
+        .then(response => {
+          const bmcTime = response.data.data.Elapsed / 1000;
+          commit('setBmcTime', bmcTime);
         })
         .catch(error => console.log(error));
     }
