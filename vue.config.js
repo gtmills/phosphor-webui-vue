@@ -1,18 +1,27 @@
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `
+          @import "@/assets/styles/_obmc-custom.scss";
+        `
+      }
+    }
+  },
   devServer: {
     proxy: {
-      "/": {
+      '/': {
         target: process.env.BASE_URL,
         onProxyRes: proxyRes => {
-          if (proxyRes.headers["set-cookie"]) {
+          if (proxyRes.headers['set-cookie']) {
             // Need to remove 'Secure' flag on set-cookie value so browser
             // can create cookie for local development
-            const cookies = proxyRes.headers["set-cookie"].map(cookie =>
-              cookie.replace(/; secure/gi, "")
+            const cookies = proxyRes.headers['set-cookie'].map(cookie =>
+              cookie.replace(/; secure/gi, '')
             );
-            proxyRes.headers["set-cookie"] = cookies;
+            proxyRes.headers['set-cookie'] = cookies;
           }
         }
       }
