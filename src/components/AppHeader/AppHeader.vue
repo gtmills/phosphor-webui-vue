@@ -14,7 +14,7 @@
           <b-nav>
             <b-nav-item>
               Health
-              <status-icon :status="'error'" />
+              <status-icon :status="'danger'" />
             </b-nav-item>
             <b-nav-item>
               Power
@@ -51,14 +51,13 @@ export default {
     },
     hostStatusIcon() {
       switch (this.hostStatus) {
-        case "Running":
-          return "on";
-        case "Off":
-          return "off";
-        case "Error":
-          return "error";
+        case "on":
+          return "success";
+        case "error":
+          return "danger";
+        case "off":
         default:
-          return "off";
+          return "secondary";
       }
     }
   },

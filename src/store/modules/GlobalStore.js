@@ -6,6 +6,7 @@ const HOST_STATE = {
   error: 'xyz.openbmc_project.State.Host.HostState.Quiesced',
   transition: {
     on: 'xyz.openbmc_project.State.Host.Transition.On',
+    off: 'xyz.openbmc_project.State.Host.Transition.Off',
     reboot: 'xyz.openbmc_project.State.Host.Transition.Reboot'
   }
 };
@@ -13,15 +14,15 @@ const HOST_STATE = {
 const hostStateMapper = hostState => {
   switch (hostState) {
     case HOST_STATE.on:
-      return 'Running';
+      return 'on';
     case HOST_STATE.off:
-      return 'Off';
+      return 'off';
     case HOST_STATE.error:
-      return 'Error';
+      return 'error';
     case HOST_STATE.transition.reboot:
-      return 'Rebooting';
+      return 'rebooting';
     default:
-      return 'Unreachable';
+      return 'unreachable';
   }
 };
 
@@ -29,7 +30,7 @@ const GlobalStore = {
   namespaced: true,
   state: {
     hostName: '--',
-    hostStatus: 'Unreachable'
+    hostStatus: 'unreachable'
   },
   getters: {
     hostName(state) {
