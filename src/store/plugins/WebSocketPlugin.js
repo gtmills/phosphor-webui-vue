@@ -1,4 +1,13 @@
-const HostStatusPlugin = store => {
+/**
+ * WebSocketPlugin will allow us to get new data from the server
+ * without having to poll for changes on the frontend.
+ *
+ * This plugin is subscribed to host state property changes, which
+ * is indicated in the app header Power status.
+ *
+ * https://github.com/openbmc/docs/blob/b41aff0fabe137cdb0cfff584b5fe4a41c0c8e77/rest-api.md#event-subscription-protocol
+ */
+const WebSocketPlugin = store => {
   let ws;
   const data = {
     paths: ['/xyz/openbmc_project/state/host0'],
@@ -34,4 +43,4 @@ const HostStatusPlugin = store => {
   if (store.getters['authentication/isLoggedIn']) initWebSocket();
 };
 
-export default HostStatusPlugin;
+export default WebSocketPlugin;
