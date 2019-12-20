@@ -9,25 +9,25 @@
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ system.Model || "N/A" }}</dd>
+                <dd>{{ system.Model || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MANUFACTURER</dt>
-                <dd>{{ system.Manufacturer || "N/A" }}</dd>
+                <dd>{{ system.Manufacturer || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>SERIAL NUMBER</dt>
-                <dd>{{ system.SerialNumber || "N/A" }}</dd>
+                <dd>{{ system.SerialNumber || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ software.Version || "N/A" }}</dd>
+                <dd>{{ software.Version || 'N/A' }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -38,25 +38,25 @@
             <b-col sm="6">
               <dl>
                 <dt>HOSTNAME</dt>
-                <dd>{{ network.config.HostName || "N/A" }}</dd>
+                <dd>{{ network.config.HostName || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MAC ADDRESS</dt>
-                <dd>{{ network.eth0.MACAddress || "N/A" }}</dd>
+                <dd>{{ network.eth0.MACAddress || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>IP ADDRESS</dt>
-                <dd>{{ network.ipv4.Address || "N/A" }}</dd>
+                <dd>{{ network.ipv4.Address || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>FIRMWARE VERSION</dt>
-                <dd>{{ logging.entry.Version || "N/A" }}</dd>
+                <dd>{{ logging.entry.Version || 'N/A' }}</dd>
               </dl>
             </b-col>
           </b-row>
@@ -67,7 +67,7 @@
             <b-col sm="6">
               <dl>
                 <dt>POWER CONSUMPTION</dt>
-                <dd>{{ total_power.description || "N/A" }}</dd>
+                <dd>{{ total_power.description || 'N/A' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -92,11 +92,11 @@
 </template>
 
 <script>
-import OverviewQuickLinks from "./OverviewQuickLinks";
-import OverviewEvents from "./OverviewEvents";
+import OverviewQuickLinks from './OverviewQuickLinks';
+import OverviewEvents from './OverviewEvents';
 
 export default {
-  name: "Overview",
+  name: 'Overview',
   components: {
     quickLinks: OverviewQuickLinks,
     events: OverviewEvents
@@ -106,24 +106,24 @@ export default {
       logging: {
         entry: {
           Description:
-            "An internal failure has occurred while performing an operation.",
-          EventID: "FQPSPCR0021F",
+            'An internal failure has occurred while performing an operation.',
+          EventID: 'FQPSPCR0021F',
           Id: 1,
           Resolved: false,
-          Severity: "xyz.openbmc_project.Logging.Entry.Level.Error",
+          Severity: 'xyz.openbmc_project.Logging.Entry.Level.Error',
           Timestamp: 1574782085071,
-          Version: "ibm-v2.7.0-rc1-5-gfd9b55f-r19-1-g8c075d3"
+          Version: 'ibm-v2.7.0-rc1-5-gfd9b55f-r19-1-g8c075d3'
         }
       },
       network: {
         config: {
-          HostName: "witherspoon"
+          HostName: 'witherspoon'
         },
         eth0: {
-          MACAddress: "00:00:00:00:00:00"
+          MACAddress: '00:00:00:00:00:00'
         },
         ipv4: {
-          Address: "00.00.00.00"
+          Address: '00.00.00.00'
         }
       },
       power_cap: {
@@ -131,15 +131,15 @@ export default {
         PowerCapEnable: false
       },
       software: {
-        Version: "IBM-witherspoon-OP9-v2.4-4.22"
+        Version: 'IBM-witherspoon-OP9-v2.4-4.22'
       },
       system: {
-        Manufacturer: "",
-        Model: "0000000000000000",
-        SerialNumber: "0000000000000000"
+        Manufacturer: '',
+        Model: '0000000000000000',
+        SerialNumber: '0000000000000000'
       },
       total_power: {
-        description: "0"
+        description: '0'
       }
     };
   }

@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppNavigation from "@/components/AppNavigation";
+import AppHeader from '@/components/AppHeader';
+import AppNavigation from '@/components/AppNavigation';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
     AppNavigation
@@ -33,14 +33,14 @@ export default {
         let focusTarget = this.$refs.focusTarget.$el;
 
         // Make focustarget programmatically focussable
-        focusTarget.setAttribute("tabindex", "-1");
+        focusTarget.setAttribute('tabindex', '-1');
 
         // Focus element
         focusTarget.focus();
 
         // Remove tabindex from focustarget
         // Reason: https://axesslab.com/skip-links/#update-3-a-comment-from-gov-uk
-        focusTarget.removeAttribute("tabindex");
+        focusTarget.removeAttribute('tabindex');
       });
     }
   }
