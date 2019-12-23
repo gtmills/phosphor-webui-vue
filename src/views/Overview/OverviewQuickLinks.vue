@@ -9,7 +9,7 @@
     <b-list-group-item>
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmc.Elapsed | date("MMM, DD YYYY HH:MM:SS A ZZ") }}</dd>
+        <dd>{{ bmc.Elapsed | date('MMM, DD YYYY HH:MM:SS A ZZ') }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item>
@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import ChevronRight16 from "@carbon/icons-vue/es/chevron--right/16";
+import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
-  name: "quickLinks",
+  name: 'quickLinks',
   components: {
     ChevronRight16
   },
@@ -54,7 +54,7 @@ export default {
       },
       logging: {
         entry: {
-          Severity: "Error"
+          Severity: 'Error'
         }
       },
       checked: false
