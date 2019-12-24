@@ -14,13 +14,27 @@
       </b-col>
 
       <b-col class="login-form" md="6">
-        <b-form @submit.prevent="login">
+        <b-form @submit.prevent="login" novalidate>
+          <b-alert
+            class="login-error"
+            v-if="errorMsg.title"
+            show
+            variant="danger"
+          >
+            <h2>{{ errorMsg.title }}</h2>
+            <p v-if="errorMsg.action">{{ errorMsg.action }}</p>
+          </b-alert>
           <b-form-group
             id="username-group"
             label="Username"
             label-for="username"
           >
-            <b-form-input id="username" v-model="username" type="text" required>
+            <b-form-input
+              id="username"
+              v-model="userInfo.username"
+              type="text"
+              required
+            >
             </b-form-input>
           </b-form-group>
 
@@ -31,14 +45,19 @@
           >
             <b-form-input
               id="password"
-              v-model="password"
+              v-model="userInfo.password"
               type="password"
               required
             >
             </b-form-input>
           </b-form-group>
 
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button
+            type="submit"
+            :disabled="disableSubmitButton"
+            variant="primary"
+            >Login</b-button
+          >
         </b-form>
       </b-col>
     </b-row>
@@ -50,18 +69,54 @@ export default {
   name: 'Login',
   data() {
     return {
-      username: '',
-      password: ''
+      errorMsg: {
+        title: null,
+        action: null
+      },
+      userInfo: {
+        username: null,
+        password: null
+      },
+      disableSubmitButton: false,
+      submitButtonText: 'Login'
     };
   },
   methods: {
+    validateForm: function() {
+      this.errorMsg.title = null;
+      this.errorMsg.action = null;
+
+      // Name error message
+      if (!this.userInfo.username || !this.userInfo.password) {
+        this.errorMsg.title = 'Username and password required.';
+      }
+
+      if (!this.errorMsg.title) {
+        return true;
+      }
+
+      return false;
+    },
     login: function() {
-      const username = this.username;
-      const password = this.password;
-      this.$store
-        .dispatch('authentication/login', [username, password])
-        .then(() => this.$router.push('/'))
-        .catch(error => console.log(error));
+      const isValidForm = this.validateForm();
+      if (isValidForm) {
+        const username = this.userInfo.username;
+        const password = this.userInfo.password;
+        this.disableSubmitButton = true;
+        this.$store
+          .dispatch('authentication/login', [username, password])
+          .then(() => {
+            this.$router.push('/');
+          })
+          .catch(error => {
+            this.errorMsg.title = 'Inavalid username or password.';
+            this.errorMsg.action = 'Please try again.';
+            console.log(error);
+          })
+          .finally(() => {
+            this.disableSubmitButton = false;
+          });
+      }
     }
   }
 };
@@ -102,6 +157,18 @@ export default {
 
   @include media-breakpoint-up(md) {
     margin-left: 4rem;
+  }
+}
+
+.login-error {
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 }
 
