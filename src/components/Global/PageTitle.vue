@@ -7,8 +7,8 @@
 
 <script>
 export default {
-  name: "PageTitle",
-  props: ["pageTitle", "pageDescription"]
+  name: 'PageTitle',
+  props: ['pageTitle', 'pageDescription']
 };
 </script>
 

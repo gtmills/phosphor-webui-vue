@@ -7,8 +7,8 @@
 
 <script>
 export default {
-  name: "PageSection",
-  props: ["sectionTitle"]
+  name: 'PageSection',
+  props: ['sectionTitle']
 };
 </script>
 
@@ -20,7 +20,7 @@ h2 {
   @include font-size($h4-font-size);
   margin-bottom: $spacer;
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 100px;
     border: 1px solid $gray-300;
