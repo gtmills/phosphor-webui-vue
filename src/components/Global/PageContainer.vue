@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  margin-top: 24px;
-  margin-bottom: 50px;
+  margin-top: $spacer * 1.5;
+  margin-bottom: $spacer * 3;
 }
 </style>

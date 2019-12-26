@@ -13,14 +13,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-title {
+  margin-bottom: $spacer * 2;
+}
 h1 {
   font-weight: $display4-weight;
   line-height: $display-line-height;
 }
-.page-title {
-  margin-bottom: 2rem;
-}
-.page-description {
-  max-width: 750px;
+p {
+  max-width: 72ch;
 }
 </style>

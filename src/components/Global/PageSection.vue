@@ -14,11 +14,11 @@ export default {
 
 <style lang="scss" scoped>
 .page-section {
-  margin-bottom: 2rem;
+  margin-bottom: $spacer * 2;
 }
 h2 {
   @include font-size($h4-font-size);
-  margin-bottom: 1rem;
+  margin-bottom: $spacer;
   &::after {
     content: "";
     display: block;
