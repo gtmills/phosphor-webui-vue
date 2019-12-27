@@ -137,5 +137,6 @@ export default {
 }
 svg:not(.icon-expand) {
   margin-right: $spacer;
+  vertical-align: text-bottom;
 }
 </style>
