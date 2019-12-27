@@ -1,6 +1,6 @@
 <template>
   <b-nav vertical>
-    <b-nav-item to="/"><icon-overview /> Overview</b-nav-item>
+    <b-nav-item to="/"><icon-overview />Overview</b-nav-item>
 
     <li class="nav-item">
       <b-button v-b-toggle.health-menu variant="link">
