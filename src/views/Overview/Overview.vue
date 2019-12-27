@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <PageTitle pageTitle="Overview" />
+    <PageTitle />
     <b-row>
       <b-col lg="8" sm="12">
         <PageSection sectionTitle="Server Information">

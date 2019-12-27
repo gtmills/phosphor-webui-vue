@@ -1,14 +1,19 @@
 <template>
   <header class="page-title">
-    <h1>{{ pageTitle }}</h1>
-    <p v-if="pageDescription">{{ pageDescription }}</p>
+    <h1>{{ title }}</h1>
+    <p v-if="description">{{ description }}</p>
   </header>
 </template>
 
 <script>
 export default {
   name: 'PageTitle',
-  props: ['pageTitle', 'pageDescription']
+  props: ['description'],
+  data() {
+    return {
+      title: this.$route.meta.title
+    };
+  }
 };
 </script>
 

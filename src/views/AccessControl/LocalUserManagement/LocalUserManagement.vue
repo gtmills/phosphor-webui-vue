@@ -1,6 +1,6 @@
 <template>
   <b-container class="ml-0">
-    <PageTitle pageTitle="Local user management" />
+    <PageTitle />
     <b-row>
       <b-col lg="10">
         <b-button @click="initModalSettings" variant="link">
