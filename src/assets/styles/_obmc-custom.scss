@@ -49,3 +49,8 @@ $colors: map-remove($theme-colors, "light", "dark");
 @import "~bootstrap/scss/print";
 
 @import "~bootstrap-vue/src/index.scss";
+
+@import "./buttons";
+
+// Overrides should be imported last
+@import "./overrides";
