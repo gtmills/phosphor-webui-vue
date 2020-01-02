@@ -32,9 +32,9 @@ const routes = [
       {
         path: '/unauthorized',
         name: 'unauthorized',
-        component: () => import('@/views/Unauhorized'),
+        component: () => import('@/views/Unauthorized'),
         meta: {
-          title: 'Unauhorized'
+          title: 'Unauthorized'
         }
       }
     ]
