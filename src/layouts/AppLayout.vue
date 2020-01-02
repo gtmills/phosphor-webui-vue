@@ -7,9 +7,9 @@
           <AppNavigation />
         </b-col>
         <b-col cols="12" md="9" lg="10">
-          <main id="main-content">
+          <PageContainer>
             <router-view ref="routerView" />
-          </main>
+          </PageContainer>
         </b-col>
       </b-row>
     </b-container>
@@ -17,13 +17,16 @@
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppNavigation from "@/components/AppNavigation";
+import AppHeader from '@/components/AppHeader';
+import AppNavigation from '@/components/AppNavigation';
+import PageContainer from '../components/Global/PageContainer';
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
-    AppNavigation
+    AppNavigation,
+    PageContainer
   },
   watch: {
     $route: function() {
@@ -33,14 +36,14 @@ export default {
         let focusTarget = this.$refs.focusTarget.$el;
 
         // Make focustarget programmatically focussable
-        focusTarget.setAttribute("tabindex", "-1");
+        focusTarget.setAttribute('tabindex', '-1');
 
         // Focus element
         focusTarget.focus();
 
         // Remove tabindex from focustarget
         // Reason: https://axesslab.com/skip-links/#update-3-a-comment-from-gov-uk
-        focusTarget.removeAttribute("tabindex");
+        focusTarget.removeAttribute('tabindex');
       });
     }
   }

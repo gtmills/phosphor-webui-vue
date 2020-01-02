@@ -4,7 +4,7 @@
     <b-list-group-item>
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmcTime | date("MMM, DD YYYY HH:MM:SS A ZZ") }}</dd>
+        <dd>{{ bmcTime | date('MMM, DD YYYY HH:MM:SS A ZZ') }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item>
@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import ChevronRight16 from "@carbon/icons-vue/es/chevron--right/16";
+import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
-  name: "quickLinks",
+  name: 'quickLinks',
   components: {
     ChevronRight16
   },
@@ -47,12 +47,12 @@ export default {
   },
   computed: {
     bmcTime() {
-      return this.$store.getters["global/bmcTime"];
+      return this.$store.getters['global/bmcTime'];
     }
   },
   methods: {
     getBmcTime() {
-      this.$store.dispatch("global/getBmcTime");
+      this.$store.dispatch('global/getBmcTime');
     }
   }
 };

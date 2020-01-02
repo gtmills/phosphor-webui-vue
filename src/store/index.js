@@ -11,6 +11,8 @@ import PowerCapStore from './modules/Control/PoweCapStore';
 import NetworkSettingStore from './modules/Configuration/NetworkSettingsStore';
 import EventLogStore from './modules/Health/EventLogStore';
 
+import WebSocketPlugin from './plugins/WebSocketPlugin';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -27,5 +29,6 @@ export default new Vuex.Store({
     powerCap: PowerCapStore,
     networkSettings: NetworkSettingStore,
     eventLog: EventLogStore
-  }
+  },
+  plugins: [WebSocketPlugin]
 });

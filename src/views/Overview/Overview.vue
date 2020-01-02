@@ -1,27 +1,26 @@
 <template>
   <b-container fluid>
-    <h1>Overview</h1>
+    <PageTitle />
     <b-row>
       <b-col lg="8" sm="12">
-        <section>
-          <h2>Server information</h2>
+        <PageSection sectionTitle="Server Information">
           <b-row>
             <b-col sm="6">
               <dl>
                 <dt>MODEL</dt>
-                <dd>{{ serverInfo.Model || "--" }}</dd>
+                <dd>{{ serverInfo.Model || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>MANUFACTURER</dt>
-                <dd>{{ serverInfo.Manufacturer || "--" }}</dd>
+                <dd>{{ serverInfo.Manufacturer || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>SERIAL NUMBER</dt>
-                <dd>{{ serverInfo.SerialNumber || "--" }}</dd>
+                <dd>{{ serverInfo.SerialNumber || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -31,9 +30,8 @@
               </dl>
             </b-col>
           </b-row>
-        </section>
-        <section>
-          <h2>BMC information</h2>
+        </PageSection>
+        <PageSection sectionTitle="BMC information">
           <b-row>
             <b-col sm="6">
               <dl>
@@ -60,9 +58,8 @@
               </dl>
             </b-col>
           </b-row>
-        </section>
-        <section>
-          <h2>Power consumption</h2>
+        </PageSection>
+        <PageSection sectionTitle="Power consumption">
           <b-row>
             <b-col sm="6">
               <dl>
@@ -77,28 +74,31 @@
               </dl>
             </b-col>
           </b-row>
-        </section>
+        </PageSection>
       </b-col>
       <b-col lg="4" sm="12">
         <quickLinks />
       </b-col>
     </b-row>
-    <section>
-      <h2>High priority events</h2>
+    <PageSection sectionTitle="High priority events">
       <events />
-    </section>
+    </PageSection>
   </b-container>
 </template>
 
 <script>
-import OverviewQuickLinks from "./OverviewQuickLinks";
-import OverviewEvents from "./OverviewEvents";
+import OverviewQuickLinks from './OverviewQuickLinks';
+import OverviewEvents from './OverviewEvents';
+import PageTitle from '../../components/Global/PageTitle';
+import PageSection from '../../components/Global/PageSection';
 
 export default {
-  name: "Overview",
+  name: 'Overview',
   components: {
     quickLinks: OverviewQuickLinks,
-    events: OverviewEvents
+    events: OverviewEvents,
+    PageTitle,
+    PageSection
   },
   created() {
     this.getServerInfo();
@@ -111,51 +111,51 @@ export default {
   },
   computed: {
     serverInfo() {
-      return this.$store.getters["overview/serverInfo"];
+      return this.$store.getters['overview/serverInfo'];
     },
     hostName() {
-      return this.$store.getters["global/hostName"];
+      return this.$store.getters['global/hostName'];
     },
     hostActiveVersion() {
-      return this.$store.getters["firmware/hostActiveVersion"];
+      return this.$store.getters['firmware/hostActiveVersion'];
     },
     bmcActiveVersion() {
-      return this.$store.getters["firmware/bmcActiveVersion"];
+      return this.$store.getters['firmware/bmcActiveVersion'];
     },
     powerConsumption() {
-      return this.$store.getters["powerConsumption/powerConsumption"];
+      return this.$store.getters['powerConsumption/powerConsumption'];
     },
     powerCapValue() {
-      return this.$store.getters["powerCap/powerCapValue"];
+      return this.$store.getters['powerCap/powerCapValue'];
     },
     ipAddress() {
-      return this.$store.getters["networkSettings/ipAddress"];
+      return this.$store.getters['networkSettings/ipAddress'];
     },
     macAddress() {
-      return this.$store.getters["networkSettings/macAddress"];
+      return this.$store.getters['networkSettings/macAddress'];
     }
   },
   methods: {
     getServerInfo() {
-      this.$store.dispatch("overview/getServerInfo");
+      this.$store.dispatch('overview/getServerInfo');
     },
     getHostInfo() {
-      this.$store.dispatch("global/getHostName");
+      this.$store.dispatch('global/getHostName');
     },
     getFirmwareInfo() {
-      this.$store.dispatch("firmware/getFirmwareInfo");
+      this.$store.dispatch('firmware/getFirmwareInfo');
     },
     getPowerData() {
-      this.$store.dispatch("powerConsumption/getPowerData");
+      this.$store.dispatch('powerConsumption/getPowerData');
     },
     getPowerCapData() {
-      this.$store.dispatch("powerCap/getPowerCapData");
+      this.$store.dispatch('powerCap/getPowerCapData');
     },
     getNetworkData() {
-      this.$store.dispatch("networkSettings/getNetworkData");
+      this.$store.dispatch('networkSettings/getNetworkData');
     },
     getEventLogData() {
-      this.$store.dispatch("eventLog/getEventLogData");
+      this.$store.dispatch('eventLog/getEventLogData');
     }
   }
 };

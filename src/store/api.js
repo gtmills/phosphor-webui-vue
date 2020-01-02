@@ -4,9 +4,12 @@ const api = Axios.create({
   withCredentials: true
 });
 
-// TODO: Permanent authentication solutoin
-// Using defaults to set auth for sending
-// auth object in header
+api.interceptors.response.use(undefined, error => {
+  let response = error.response;
+  if (response.status == 401) {
+    window.location = '/login';
+  }
+});
 
 export default {
   get(path) {
@@ -26,6 +29,5 @@ export default {
   },
   all(promises) {
     return Axios.all(promises);
-  },
-  defaults: api.defaults
+  }
 };

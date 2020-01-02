@@ -1,10 +1,6 @@
 <template>
   <b-container class="ml-0">
-    <b-row>
-      <b-col lg="10">
-        <h1>Local user management</h1>
-      </b-col>
-    </b-row>
+    <PageTitle />
     <b-row>
       <b-col lg="10">
         <b-button @click="initModalSettings" variant="link">
@@ -63,17 +59,18 @@
 </template>
 
 <script>
-import IconTrashcan from "@carbon/icons-vue/es/trash-can/20";
-import IconEdit from "@carbon/icons-vue/es/edit/20";
-import IconAdd from "@carbon/icons-vue/es/add--alt/20";
-import IconSettings from "@carbon/icons-vue/es/settings/20";
+import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
+import IconEdit from '@carbon/icons-vue/es/edit/20';
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
+import IconSettings from '@carbon/icons-vue/es/settings/20';
 
-import TableRoles from "./TableRoles";
-import ModalUser from "./ModalUser";
-import ModalSettings from "./ModalSettings";
+import TableRoles from './TableRoles';
+import ModalUser from './ModalUser';
+import ModalSettings from './ModalSettings';
+import PageTitle from '../../../components/Global/PageTitle';
 
 export default {
-  name: "local-users",
+  name: 'local-users',
   components: {
     IconAdd,
     IconEdit,
@@ -81,7 +78,8 @@ export default {
     IconTrashcan,
     ModalSettings,
     ModalUser,
-    TableRoles
+    TableRoles,
+    PageTitle
   },
   data() {
     return {
@@ -94,7 +92,7 @@ export default {
   },
   computed: {
     allUsers() {
-      return this.$store.getters["localUsers/allUsers"];
+      return this.$store.getters['localUsers/allUsers'];
     },
     tableItems() {
       // transform user data to table data
@@ -103,13 +101,13 @@ export default {
           username: user.UserName,
           privilege: user.RoleId,
           status: user.Locked
-            ? "Locked"
+            ? 'Locked'
             : user.Enabled
-            ? "Enabled"
-            : "Disabled",
+            ? 'Enabled'
+            : 'Disabled',
           actions: {
             edit: true,
-            delete: user.UserName === "root" ? false : true
+            delete: user.UserName === 'root' ? false : true
           }
         };
       });
@@ -117,19 +115,19 @@ export default {
   },
   methods: {
     getUsers() {
-      this.$store.dispatch("localUsers/getUsers");
+      this.$store.dispatch('localUsers/getUsers');
     },
     initModalUser(user) {
       this.activeUser = user;
-      this.$bvModal.show("modal-user");
+      this.$bvModal.show('modal-user');
     },
     initModalDelete(user) {
       this.$bvModal
         .msgBoxConfirm(
           `Are you sure you want to delete user '${user.username}'? This action cannot be undone.`,
           {
-            title: "Delete user",
-            okTitle: "Delete user"
+            title: 'Delete user',
+            okTitle: 'Delete user'
           }
         )
         .then(deleteConfirmed => {
@@ -140,20 +138,20 @@ export default {
     },
     initModalSettings() {
       if (this.settings) {
-        this.$bvModal.show("modal-settings");
+        this.$bvModal.show('modal-settings');
       } else {
         // fetch settings then show modal
       }
     },
     saveUser({ newUser, form }) {
       if (newUser) {
-        this.$store.dispatch("localUsers/createUser", form);
+        this.$store.dispatch('localUsers/createUser', form);
       } else {
-        this.$store.dispatch("localUsers/updateUser", form);
+        this.$store.dispatch('localUsers/updateUser', form);
       }
     },
     deleteUser({ username }) {
-      this.$store.dispatch("localUsers/deleteUser", username);
+      this.$store.dispatch('localUsers/deleteUser', username);
     },
     clearActiveUser() {
       this.activeUser = null;

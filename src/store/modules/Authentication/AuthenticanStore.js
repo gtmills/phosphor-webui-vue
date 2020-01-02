@@ -42,6 +42,7 @@ const AuthenticationStore = {
       api
         .post('/logout', { data: [] })
         .then(() => commit('logout'))
+        .then(() => (window.location = '/login'))
         .catch(error => console.log(error));
     }
   }

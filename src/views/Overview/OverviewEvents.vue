@@ -6,7 +6,7 @@
         <b-badge variant="danger">{{ logData.severity_code }}</b-badge>
         <div class="d-flex w-100 justify-content-between">
           <small>{{
-            logData.Timestamp | date("MMM DD YYYY HH:MM:SS A ZZ")
+            logData.Timestamp | date('MMM DD YYYY HH:MM:SS A ZZ')
           }}</small>
           <ChevronRight16 />
         </div>
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import ChevronRight16 from "@carbon/icons-vue/es/chevron--right/16";
+import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
-  name: "events",
+  name: 'events',
   components: {
     ChevronRight16
   },
@@ -29,12 +29,12 @@ export default {
   },
   computed: {
     eventLogData() {
-      return this.$store.getters["eventLog/eventLogData"];
+      return this.$store.getters['eventLog/eventLogData'];
     }
   },
   methods: {
     getEventLogData() {
-      this.$store.dispatch("eventLog/getEventLogData");
+      this.$store.dispatch('eventLog/getEventLogData');
     }
   }
 };
