@@ -78,51 +78,68 @@ export default {
 </script>
 
 <style scoped lang="scss">
+svg:not(.icon-expand) {
+  margin-right: $spacer;
+  vertical-align: text-bottom;
+}
+
 .nav {
   min-height: 100%;
   padding-top: $spacer;
 }
+
 .subnav {
   list-style: none;
   padding-left: 0;
   margin-left: 0;
+
   .nav-link {
     padding-left: $spacer * 4;
+
     &:not(.nav__link--current) {
       font-weight: normal;
     }
   }
 }
+
 .btn-link {
   width: 100%;
   text-align: left;
   text-decoration: none !important;
   border-radius: 0;
+
   &.collapsed {
     .icon-expand {
       transform: rotate(180deg);
     }
   }
+
   &:focus {
     // TODO: make box shadow color consistent
     box-shadow: $btn-focus-box-shadow;
   }
 }
+
 .icon-expand {
   float: right;
   margin-top: $spacer / 4;
 }
+
 .btn-link,
 .nav-link {
   position: relative;
   font-weight: $headings-font-weight;
   padding-left: $spacer; // defining consistent padding for links and buttons
   color: $gray-900 !important; //using important to avoid styling states
+
   &:hover {
     background-color: $gray-300;
   }
 }
 .nav__link--current {
+  font-weight: $headings-font-weight;
+  background-color: $gray-300;
+
   &::before {
     content: '';
     position: absolute;
@@ -132,11 +149,5 @@ export default {
     width: 4px;
     background-color: $primary;
   }
-  font-weight: $headings-font-weight;
-  background-color: $gray-300;
-}
-svg:not(.icon-expand) {
-  margin-right: $spacer;
-  vertical-align: text-bottom;
 }
 </style>
