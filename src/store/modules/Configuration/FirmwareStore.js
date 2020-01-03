@@ -33,46 +33,31 @@ const FirmwareStore = {
     getFirmwareInfo({ commit }) {
       api
         .get('/xyz/openbmc_project/software/enumerate')
-        .then(({ data }) => {
-          const firmwareInfo = data.data;
-          const json = JSON.stringify(firmwareInfo);
-          const content = JSON.parse(json);
+        .then(response => {
+          const firmwareInfo = response.data.data;
           const functionalImages =
-            content['/xyz/openbmc_project/software/functional'].endpoints;
-          for (let key in content) {
-            if (
-              content.hasOwnProperty(key) &&
-              content[key].hasOwnProperty('Version')
-            ) {
+            firmwareInfo['/xyz/openbmc_project/software/functional'].endpoints;
+          for (let key in firmwareInfo) {
+            if (firmwareInfo[key].hasOwnProperty('Version')) {
               // If "Functional" activation status is
               // functional, else it is "activation"
               // github.com/openbmc/phosphor-dbus-interfaces/blob/master/xyz/openbmc_project/Software/Activation.interface.yaml
               let activationStatus = '';
-              if (content[key].Activation) {
-                activationStatus = content[key].Activation.split('.').pop();
+              if (firmwareInfo[key].Activation) {
+                activationStatus = firmwareInfo[key].Activation.split(
+                  '.'
+                ).pop();
               }
               if (functionalImages.includes(key)) {
                 activationStatus = 'Functional';
               }
-              let data = [];
-              data.push(
-                Object.assign(
-                  {
-                    path: key,
-                    activationStatus: activationStatus,
-                    imageId: key.split('/').pop(),
-                    data: { key: key, value: content[key] }
-                  },
-                  content[key]
-                )
-              );
               // Get BMC and Host active Versions
-              const imageType = content[key].Purpose.split('.').pop();
+              const imageType = firmwareInfo[key].Purpose.split('.').pop();
               if (activationStatus == 'Functional' && imageType == 'BMC') {
-                commit('setBmcActiveVersion', content[key].Version);
+                commit('setBmcActiveVersion', firmwareInfo[key].Version);
               }
               if (activationStatus == 'Functional' && imageType == 'Host') {
-                commit('setHostActiveVersion', content[key].Version);
+                commit('setHostActiveVersion', firmwareInfo[key].Version);
               }
             }
           }
