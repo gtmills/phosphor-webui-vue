@@ -54,6 +54,11 @@ export default {
     getBmcTime() {
       this.$store.dispatch('global/getBmcTime');
     }
+  },
+  data() {
+    return {
+      checked: false
+    };
   }
 };
 </script>
