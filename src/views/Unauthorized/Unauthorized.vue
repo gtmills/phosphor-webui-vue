@@ -6,7 +6,7 @@
 <script>
 import PageTitle from '../../components/Global/PageTitle';
 export default {
-  name: 'unauthorized',
+  name: 'Unauthorized',
   components: {
     PageTitle
   },
