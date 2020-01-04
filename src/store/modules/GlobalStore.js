@@ -69,6 +69,7 @@ const GlobalStore = {
       api
         .get('/xyz/openbmc_project/time/bmc')
         .then(response => {
+          // bmcTime is stored in microseconds, convert to millseconds
           const bmcTime = response.data.data.Elapsed / 1000;
           commit('setBmcTime', bmcTime);
         })
