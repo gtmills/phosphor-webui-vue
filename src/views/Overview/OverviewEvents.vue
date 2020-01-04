@@ -13,6 +13,9 @@
         <p class="mb-1">{{ logData.eventID }}: {{ logData.description }}</p>
       </b-list-group-item>
     </b-list-group>
+    <b-list-group v-if="!eventLogData">
+      There are no high priority events to display at this time.
+    </b-list-group>
   </div>
 </template>
 

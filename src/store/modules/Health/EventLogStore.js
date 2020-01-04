@@ -20,9 +20,8 @@ const EventLogStore = {
       api
         .get('/xyz/openbmc_project/logging/enumerate')
         .then(({ data }) => {
-          const eventLog = JSON.stringify(data.data);
-          const eventLogContent = JSON.parse(eventLog);
-          let eventLogData = [];
+          const eventLog = data.data;
+          const eventLogData = [];
           const severityFlags = {
             low: false,
             medium: false,
@@ -38,29 +37,29 @@ const EventLogStore = {
             Debug: 'Low',
             Informational: 'Low'
           };
-          for (let key in eventLogContent) {
+          for (let key in eventLog) {
             let severityCode = '';
             let priority = '';
             let relatedItems = [];
             let eventID = 'None';
             let description = 'None';
             if (
-              eventLogContent.hasOwnProperty(key) &&
-              eventLogContent[key].hasOwnProperty('Id')
+              eventLog.hasOwnProperty(key) &&
+              eventLog[key].hasOwnProperty('Id')
             ) {
-              severityCode = eventLogContent[key].Severity.split('.').pop();
+              severityCode = eventLog[key].Severity.split('.').pop();
               priority = severityToPriorityMap[severityCode];
               severityFlags[priority.toLowerCase()] = true;
-              if (eventLogContent[key].hasOwnProperty(['Associations'])) {
-                eventLogContent[key].Associations.forEach(function(item) {
+              if (eventLog[key].hasOwnProperty(['Associations'])) {
+                eventLog[key].Associations.forEach(function(item) {
                   relatedItems.push(item[2]);
                 });
               }
-              if (eventLogContent[key].hasOwnProperty(['EventID'])) {
-                eventID = eventLogContent[key].EventID;
+              if (eventLog[key].hasOwnProperty(['EventID'])) {
+                eventID = eventLog[key].EventID;
               }
-              if (eventLogContent[key].hasOwnProperty(['Description'])) {
-                description = eventLogContent[key].Description;
+              if (eventLog[key].hasOwnProperty(['Description'])) {
+                description = eventLog[key].Description;
               }
               eventLogData.push(
                 Object.assign(
@@ -71,10 +70,10 @@ const EventLogStore = {
                     severity_flags: severityFlags,
                     eventID: eventID,
                     description: description,
-                    logId: '#' + eventLogContent[key].Id,
-                    data: { key: key, value: eventLogContent[key] }
+                    logId: '#' + eventLog[key].Id,
+                    data: { key: key, value: eventLog[key] }
                   },
-                  eventLogContent[key]
+                  eventLog[key]
                 )
               );
               commit('setEventLogData', eventLogData);
