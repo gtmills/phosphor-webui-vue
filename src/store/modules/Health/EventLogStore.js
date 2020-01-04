@@ -21,12 +21,8 @@ const EventLogStore = {
         .get('/xyz/openbmc_project/logging/enumerate')
         .then(({ data }) => {
           const eventLog = data.data;
-          const eventLogData = [];
-          const severityFlags = {
-            low: false,
-            medium: false,
-            high: false
-          };
+          const entryNumber = /[1-9]/;
+          const eventLogEntries = [];
           const severityToPriorityMap = {
             Emergency: 'High',
             Alert: 'High',
@@ -38,47 +34,29 @@ const EventLogStore = {
             Informational: 'Low'
           };
           for (let key in eventLog) {
-            let severityCode = '';
-            let priority = '';
-            let relatedItems = [];
-            let eventID = 'None';
-            let description = 'None';
             if (
-              eventLog.hasOwnProperty(key) &&
-              eventLog[key].hasOwnProperty('Id')
+              key.includes('entry') &&
+              key.match(entryNumber) &&
+              !key.includes('callout')
             ) {
-              severityCode = eventLog[key].Severity.split('.').pop();
-              priority = severityToPriorityMap[severityCode];
-              severityFlags[priority.toLowerCase()] = true;
-              if (eventLog[key].hasOwnProperty(['Associations'])) {
-                eventLog[key].Associations.forEach(function(item) {
-                  relatedItems.push(item[2]);
-                });
-              }
-              if (eventLog[key].hasOwnProperty(['EventID'])) {
-                eventID = eventLog[key].EventID;
-              }
-              if (eventLog[key].hasOwnProperty(['Description'])) {
-                description = eventLog[key].Description;
-              }
-              eventLogData.push(
+              const eventKey = eventLog[key];
+              const eventSeverity = eventKey.Severity.split('.').pop();
+              const eventPriority = severityToPriorityMap[eventSeverity];
+              eventLogEntries.push(
                 Object.assign(
                   {
-                    path: key,
-                    priority: priority,
-                    severity_code: severityCode,
-                    severity_flags: severityFlags,
-                    eventID: eventID,
-                    description: description,
-                    logId: '#' + eventLog[key].Id,
-                    data: { key: key, value: eventLog[key] }
+                    logId: '#' + eventKey.Id,
+                    severity: eventPriority,
+                    timestamp: eventKey.Timestamp,
+                    eventID: eventKey.EventID,
+                    description: eventKey.Description
                   },
-                  eventLog[key]
+                  eventKey
                 )
               );
-              commit('setEventLogData', eventLogData);
             }
           }
+          commit('setEventLogData', eventLogEntries);
         })
         .catch(error => {
           console.log('Event Log Data:', error);
