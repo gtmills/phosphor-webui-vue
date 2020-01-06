@@ -18,7 +18,7 @@ const routes = [
         path: '',
         component: () => import('@/views/Overview'),
         meta: {
-          title: 'Server Overview'
+          title: 'Overview'
         }
       },
       {
@@ -26,7 +26,15 @@ const routes = [
         name: 'local-users',
         component: () => import('@/views/AccessControl/LocalUserManagement'),
         meta: {
-          title: 'Manage Local Users'
+          title: 'Local user management'
+        }
+      },
+      {
+        path: '/unauthorized',
+        name: 'unauthorized',
+        component: () => import('@/views/Unauthorized'),
+        meta: {
+          title: 'Unauthorized'
         }
       }
     ]

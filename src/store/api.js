@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import router from '../router';
 
 const api = Axios.create({
   withCredentials: true
@@ -6,8 +7,13 @@ const api = Axios.create({
 
 api.interceptors.response.use(undefined, error => {
   let response = error.response;
+
   if (response.status == 401) {
     window.location = '/login';
+  }
+
+  if (response.status == 403) {
+    router.push({ name: 'unauthorized' });
   }
 });
 
