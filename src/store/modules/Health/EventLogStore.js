@@ -19,8 +19,8 @@ const EventLogStore = {
     getEventLogData({ commit }) {
       api
         .get('/xyz/openbmc_project/logging/enumerate')
-        .then(({ data }) => {
-          const eventLog = data.data;
+        .then(response => {
+          const eventLog = response.data.data;
           const entryNumber = /[1-9]/;
           const eventLogEntries = [];
           const severityToPriorityMap = {

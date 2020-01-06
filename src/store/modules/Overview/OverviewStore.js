@@ -19,8 +19,8 @@ const OverviewStore = {
     getServerInfo({ commit }) {
       api
         .get('/xyz/openbmc_project/inventory/system')
-        .then(({ data }) => {
-          const serverInfo = data.data;
+        .then(response => {
+          const serverInfo = response.data.data;
           commit('setServerInfo', serverInfo);
         })
         .catch(error => {

@@ -26,8 +26,8 @@ const PowerCapStore = {
     getPowerCapData({ commit }) {
       api
         .get('/xyz/openbmc_project/control/host0/power_cap')
-        .then(({ data }) => {
-          const powerCapData = data.data;
+        .then(response => {
+          const powerCapData = response.data.data;
 
           if (powerCapData.PowerCapEnable) {
             commit('setPowerCapValue', powerCapData.PowerCap + ' W');

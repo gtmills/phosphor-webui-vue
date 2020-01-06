@@ -33,8 +33,8 @@ const NetworkSettingsStore = {
     getNetworkData({ commit }) {
       api
         .get('/xyz/openbmc_project/network/enumerate')
-        .then(({ data }) => {
-          const networkData = data.data;
+        .then(response => {
+          const networkData = response.data.data;
           const ipAddresses = [];
           const interfaceId = /eth[0-9]/;
           for (let key in networkData) {
