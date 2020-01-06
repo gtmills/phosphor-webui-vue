@@ -78,9 +78,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-svg:not(.icon-expand) {
-  margin-right: $spacer;
+svg {
+  fill: $gray-900;
+  margin-left: 0 !important; //!important overriding button specificity
+  margin-right: $spacer !important; //!important override button specificity
   vertical-align: text-bottom;
+  :not(.icon-expand) {
+    margin-right: $spacer;
+  }
 }
 
 .nav {
@@ -96,7 +101,7 @@ svg:not(.icon-expand) {
   .nav-link {
     padding-left: $spacer * 4;
 
-    &:not(.nav__link--current) {
+    &:not(.nav-link--current) {
       font-weight: normal;
     }
   }
@@ -115,7 +120,6 @@ svg:not(.icon-expand) {
   }
 
   &:focus {
-    // TODO: make box shadow color consistent
     box-shadow: $btn-focus-box-shadow;
   }
 }
