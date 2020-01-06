@@ -9,9 +9,9 @@
     </b-list-group-item>
     <b-list-group-item>
       <!-- TODO: add toggle LED on/off funtionality -->
-      <b-form-checkbox v-model="checked" name="check-button" switch>
+      <b-form-checkbox v-model="serverLEDChecked" name="check-button" switch>
         Turn
-        <span v-if="!checked">on</span>
+        <span v-if="!serverLEDChecked">on</span>
         <span v-else>off</span> server LED
       </b-form-checkbox>
     </b-list-group-item>
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      checked: false
+      serverLEDChecked: false
     };
   }
 };
