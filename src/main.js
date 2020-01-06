@@ -6,6 +6,7 @@ import { dateFilter } from 'vue-date-fns';
 import {
   BadgePlugin,
   ButtonPlugin,
+  CardPlugin,
   CollapsePlugin,
   FormPlugin,
   FormCheckboxPlugin,
@@ -26,6 +27,7 @@ Vue.filter('date', dateFilter);
 
 Vue.use(BadgePlugin);
 Vue.use(ButtonPlugin);
+Vue.use(CardPlugin);
 Vue.use(CollapsePlugin);
 Vue.use(FormPlugin);
 Vue.use(FormCheckboxPlugin);

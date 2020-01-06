@@ -1,51 +1,57 @@
 <template>
-  <b-list-group>
-    <b-list-group-item
-      href="#"
-      variant="danger"
-      v-show="logging.entry.Severity === 'Error'"
-      >View 1 high priority event</b-list-group-item
-    >
-    <b-list-group-item>
+  <b-list-group horizontal="md">
+    <b-list-group-item class="flex-fill">
       <dl>
         <dt>BMC time</dt>
         <dd>{{ bmc.Elapsed | date('MMM, DD YYYY HH:MM:SS A ZZ') }}</dd>
       </dl>
     </b-list-group-item>
-    <b-list-group-item>
+    <b-list-group-item class="flex-fill">
       <!-- TODO: add toggle LED on/off funtionality -->
-      <b-form-checkbox v-model="checked" name="check-button" switch>
-        Turn
-        <span v-if="!checked">on</span>
-        <span v-else>off</span> server LED
-      </b-form-checkbox>
+      <dl>
+        <dt>Server LED</dt>
+        <dd>
+          <b-form-checkbox v-model="checked" name="check-button" switch>
+            <span v-if="!checked">on</span>
+            <span v-else>off</span>
+          </b-form-checkbox>
+        </dd>
+      </dl>
     </b-list-group-item>
-    <b-list-group-item
-      href="#"
-      class="d-flex justify-content-between align-items-center"
-    >
+    <b-list-group-item class="flex-fill d-flex align-items-center">
       <!-- TODO: link to SOL -->
-      <span>Serial over LAN console</span>
-      <ChevronRight16 />
+      <b-button
+        href="#"
+        block
+        variant="primary"
+        class="btn btn-primary d-flex justify-content-between align-items-center"
+      >
+        <span>Serial over LAN console</span>
+        <ArrowRight16 />
+      </b-button>
     </b-list-group-item>
-    <b-list-group-item
-      href="#"
-      class="d-flex justify-content-between align-items-center"
-    >
+    <b-list-group-item class="flex-fill d-flex align-items-center">
       <!-- TODO: link to network settings -->
-      <span>Edit network settings</span>
-      <ChevronRight16 />
+      <b-button
+        href="#"
+        block
+        variant="primary"
+        class="btn btn-primary d-flex justify-content-between align-items-center"
+      >
+        <span>Edit network settings</span>
+        <ArrowRight16 />
+      </b-button>
     </b-list-group-item>
   </b-list-group>
 </template>
 
 <script>
-import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import ArrowRight16 from '@carbon/icons-vue/es/arrow--right/16';
 
 export default {
   name: 'quickLinks',
   components: {
-    ChevronRight16
+    ArrowRight16
   },
   data() {
     return {
@@ -62,3 +68,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.list-group-horizontal-md {
+  width: 100%;
+}
+.list-group-horizontal-md .list-group-item {
+  border: none;
+  dl,
+  dd {
+    margin-bottom: 0;
+  }
+  .btn {
+    align-content: center;
+  }
+}
+</style>
