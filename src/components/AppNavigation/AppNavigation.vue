@@ -7,7 +7,7 @@
         <icon-health />Health
         <icon-expand class="icon-expand" />
       </b-button>
-      <b-collapse tag="ul" id="health-menu" class="subnav">
+      <b-collapse tag="ul" id="health-menu" class="nav-item__nav">
         <b-nav-item href="javascript:void(0)">Event Log</b-nav-item>
         <b-nav-item href="javascript:void(0)">Hardware Status</b-nav-item>
         <b-nav-item href="javascript:void(0)">Sensors</b-nav-item>
@@ -19,7 +19,7 @@
         <icon-control />Control
         <icon-expand class="icon-expand" />
       </b-button>
-      <b-collapse tag="ul" id="control-menu" class="subnav">
+      <b-collapse tag="ul" id="control-menu" class="nav-item__nav">
         <b-nav-item href="javascript:void(0)">
           Server power operations
         </b-nav-item>
@@ -33,7 +33,7 @@
         <icon-configuration />Configuration
         <icon-expand class="icon-expand" />
       </b-button>
-      <b-collapse tag="ul" id="configuration-menu" class="subnav">
+      <b-collapse tag="ul" id="configuration-menu" class="nav-item__nav">
         <b-nav-item href="javascript:void(0)">Network settings</b-nav-item>
         <b-nav-item href="javascript:void(0)">SNMP settings</b-nav-item>
         <b-nav-item href="javascript:void(0)">Firmware</b-nav-item>
@@ -45,7 +45,7 @@
         <icon-access-control />Access Control
         <icon-expand class="icon-expand" />
       </b-button>
-      <b-collapse tag="ul" id="access-control-menu" class="subnav">
+      <b-collapse tag="ul" id="access-control-menu" class="nav-item__nav">
         <b-nav-item href="javascript:void(0)">LDAP</b-nav-item>
         <b-nav-item to="/access-control/local-user-management">
           Local user management
@@ -88,7 +88,7 @@ svg:not(.icon-expand) {
   padding-top: $spacer;
 }
 
-.subnav {
+.nav-item__nav {
   list-style: none;
   padding-left: 0;
   margin-left: 0;
@@ -136,7 +136,8 @@ svg:not(.icon-expand) {
     background-color: $gray-300;
   }
 }
-.nav__link--current {
+
+.nav-link--current {
   font-weight: $headings-font-weight;
   background-color: $gray-300;
 
