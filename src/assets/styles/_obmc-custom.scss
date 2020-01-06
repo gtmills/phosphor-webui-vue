@@ -53,3 +53,4 @@ $colors: map-remove($theme-colors, "light", "dark");
 @import "~bootstrap-vue/src/index.scss";
 
 @import "./buttons";
+@import "./table";

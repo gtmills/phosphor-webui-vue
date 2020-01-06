@@ -2,7 +2,7 @@
   <b-container class="ml-0">
     <PageTitle />
     <b-row>
-      <b-col lg="10">
+      <b-col lg="10" class="text-right">
         <b-button @click="initModalSettings" variant="link">
           Account policy settings
           <icon-settings />
@@ -15,11 +15,17 @@
     </b-row>
     <b-row>
       <b-col lg="10">
-        <b-table bordered show-empty head-variant="dark" :items="tableItems">
-          <template v-slot:head(actions)="data"></template>
+        <b-table
+          show-empty
+          head-variant="light"
+          table-variant="light"
+          :fields="fields"
+          :items="tableItems"
+        >
           <template v-slot:cell(actions)="data">
             <b-button
               aria-label="Edit user"
+              title="Edit user"
               variant="link"
               :disabled="!data.value.edit"
               @click="initModalUser(data.item)"
@@ -28,6 +34,7 @@
             </b-button>
             <b-button
               aria-label="Delete user"
+              title="Delete user"
               variant="link"
               :disabled="!data.value.delete"
               @click="initModalDelete(data.item)"
@@ -42,6 +49,7 @@
       <b-col lg="8">
         <b-button v-b-toggle.collapse-role-table variant="link" class="mt-3">
           View privilege role descriptions
+          <icon-chevron />
         </b-button>
         <b-collapse id="collapse-role-table" class="mt-3">
           <table-roles />
@@ -63,6 +71,7 @@ import IconTrashcan from '@carbon/icons-vue/es/trash-can/20';
 import IconEdit from '@carbon/icons-vue/es/edit/20';
 import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 import IconSettings from '@carbon/icons-vue/es/settings/20';
+import IconChevron from '@carbon/icons-vue/es/chevron--up/20';
 
 import TableRoles from './TableRoles';
 import ModalUser from './ModalUser';
@@ -73,6 +82,7 @@ export default {
   name: 'local-users',
   components: {
     IconAdd,
+    IconChevron,
     IconEdit,
     IconSettings,
     IconTrashcan,
@@ -84,7 +94,17 @@ export default {
   data() {
     return {
       activeUser: null,
-      settings: null
+      settings: null,
+      fields: [
+        'username',
+        'privilege',
+        'status',
+        {
+          key: 'actions',
+          label: '',
+          tdClass: 'table-cell__actions'
+        }
+      ]
     };
   },
   created() {
@@ -163,5 +183,10 @@ export default {
 <style lang="scss" scoped>
 h1 {
   margin-bottom: 2rem;
+}
+.btn.collapsed {
+  svg {
+    transform: rotate(180deg);
+  }
 }
 </style>
