@@ -79,8 +79,5 @@ export default {
   dd {
     margin-bottom: 0;
   }
-  .btn {
-    align-content: center;
-  }
 }
 </style>
