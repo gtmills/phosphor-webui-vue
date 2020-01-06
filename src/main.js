@@ -6,6 +6,7 @@ import { dateFilter } from 'vue-date-fns';
 import {
   BadgePlugin,
   ButtonPlugin,
+  BVConfigPlugin,
   CollapsePlugin,
   FormPlugin,
   FormCheckboxPlugin,
@@ -24,6 +25,13 @@ import {
 
 Vue.filter('date', dateFilter);
 
+Vue.use(BVConfigPlugin, {
+  BFormText: { textVariant: 'black' },
+  BTable: {
+    headVariant: 'light',
+    footVariant: 'light'
+  }
+});
 Vue.use(BadgePlugin);
 Vue.use(ButtonPlugin);
 Vue.use(CollapsePlugin);

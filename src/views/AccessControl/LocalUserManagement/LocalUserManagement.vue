@@ -15,13 +15,7 @@
     </b-row>
     <b-row>
       <b-col lg="10">
-        <b-table
-          show-empty
-          head-variant="light"
-          table-variant="light"
-          :fields="fields"
-          :items="tableItems"
-        >
+        <b-table show-empty :fields="fields" :items="tableItems">
           <template v-slot:cell(actions)="data">
             <b-button
               aria-label="Edit user"
@@ -58,11 +52,7 @@
     </b-row>
     <!-- Modals -->
     <modal-settings v-bind:settings="settings"></modal-settings>
-    <modal-user
-      v-bind:user="activeUser"
-      @ok="saveUser"
-      @hidden="clearActiveUser"
-    ></modal-user>
+    <modal-user v-bind:user="activeUser" @ok="saveUser"></modal-user>
   </b-container>
 </template>
 
@@ -163,18 +153,15 @@ export default {
         // fetch settings then show modal
       }
     },
-    saveUser({ newUser, form }) {
-      if (newUser) {
-        this.$store.dispatch('localUsers/createUser', form);
+    saveUser({ isNewUser, userData }) {
+      if (isNewUser) {
+        this.$store.dispatch('localUsers/createUser', userData);
       } else {
-        this.$store.dispatch('localUsers/updateUser', form);
+        this.$store.dispatch('localUsers/updateUser', userData);
       }
     },
     deleteUser({ username }) {
       this.$store.dispatch('localUsers/deleteUser', username);
-    },
-    clearActiveUser() {
-      this.activeUser = null;
     }
   }
 };
