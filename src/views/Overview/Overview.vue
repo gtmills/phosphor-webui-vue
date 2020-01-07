@@ -101,13 +101,7 @@ export default {
     PageSection
   },
   created() {
-    this.getServerInfo();
-    this.getHostInfo();
-    this.getFirmwareInfo();
-    this.getPowerData();
-    this.getPowerCapData();
-    this.getNetworkData();
-    this.getEventLogData();
+    this.getOverviewInfo();
   },
   computed: {
     serverInfo() {
@@ -136,25 +130,13 @@ export default {
     }
   },
   methods: {
-    getServerInfo() {
+    getOverviewInfo() {
       this.$store.dispatch('overview/getServerInfo');
-    },
-    getHostInfo() {
       this.$store.dispatch('global/getHostName');
-    },
-    getFirmwareInfo() {
       this.$store.dispatch('firmware/getFirmwareInfo');
-    },
-    getPowerData() {
       this.$store.dispatch('powerConsumption/getPowerData');
-    },
-    getPowerCapData() {
       this.$store.dispatch('powerCap/getPowerCapData');
-    },
-    getNetworkData() {
       this.$store.dispatch('networkSettings/getNetworkData');
-    },
-    getEventLogData() {
       this.$store.dispatch('eventLog/getEventLogData');
     }
   }
