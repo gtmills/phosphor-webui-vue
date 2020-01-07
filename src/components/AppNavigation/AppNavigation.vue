@@ -81,9 +81,8 @@ export default {
 svg {
   fill: $gray-900;
   margin-left: 0 !important; //!important overriding button specificity
-  margin-right: $spacer !important; //!important override button specificity
   vertical-align: text-bottom;
-  :not(.icon-expand) {
+  &:not(.icon-expand) {
     margin-right: $spacer;
   }
 }
@@ -134,6 +133,7 @@ svg {
   position: relative;
   font-weight: $headings-font-weight;
   padding-left: $spacer; // defining consistent padding for links and buttons
+  padding-right: $spacer;
   color: $gray-900 !important; //using important to avoid styling states
 
   &:hover {
