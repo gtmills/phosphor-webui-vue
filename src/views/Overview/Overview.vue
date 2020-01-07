@@ -8,19 +8,19 @@
             <b-col sm="6">
               <dl>
                 <dt>Model</dt>
-                <dd>{{ serverInfo.Model || '--' }}</dd>
+                <dd>{{ serverModel }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>Manufacturer</dt>
-                <dd>{{ serverInfo.Manufacturer || '--' }}</dd>
+                <dd>{{ serverManufacturer }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
                 <dt>Serial number</dt>
-                <dd>{{ serverInfo.SerialNumber || '--' }}</dd>
+                <dd>{{ serverSerialNumber }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
@@ -104,8 +104,14 @@ export default {
     this.getOverviewInfo();
   },
   computed: {
-    serverInfo() {
-      return this.$store.getters['overview/serverInfo'];
+    serverModel() {
+      return this.$store.getters['overview/serverModel'];
+    },
+    serverManufacturer() {
+      return this.$store.getters['overview/serverManufacturer'];
+    },
+    serverSerialNumber() {
+      return this.$store.getters['overview/serverSerialNumber'];
     },
     hostName() {
       return this.$store.getters['global/hostName'];
