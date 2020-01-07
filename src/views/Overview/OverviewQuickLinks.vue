@@ -23,8 +23,8 @@
       <b-button
         href="#"
         block
-        variant="primary"
-        class="btn btn-primary d-flex justify-content-between align-items-center"
+        variant="secondary"
+        class="btn btn-secondary d-flex justify-content-between align-items-center"
       >
         <span>Serial over LAN console</span>
         <ArrowRight16 />
@@ -35,8 +35,8 @@
       <b-button
         href="#"
         block
-        variant="primary"
-        class="btn btn-primary d-flex justify-content-between align-items-center"
+        variant="secondary"
+        class="btn btn-secondary d-flex justify-content-between align-items-center"
       >
         <span>Edit network settings</span>
         <ArrowRight16 />
