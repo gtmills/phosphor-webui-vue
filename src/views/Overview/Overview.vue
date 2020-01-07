@@ -7,25 +7,25 @@
           <b-row>
             <b-col sm="6">
               <dl>
-                <dt>MODEL</dt>
+                <dt>Model</dt>
                 <dd>{{ serverInfo.Model || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>MANUFACTURER</dt>
+                <dt>Manufacturer</dt>
                 <dd>{{ serverInfo.Manufacturer || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>SERIAL NUMBER</dt>
+                <dt>Serial number</dt>
                 <dd>{{ serverInfo.SerialNumber || '--' }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>FIRMWARE VERSION</dt>
+                <dt>Firmware version</dt>
                 <dd>{{ hostActiveVersion }}</dd>
               </dl>
             </b-col>
@@ -35,25 +35,25 @@
           <b-row>
             <b-col sm="6">
               <dl>
-                <dt>HOSTNAME</dt>
+                <dt>Hostname</dt>
                 <dd>{{ hostName }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>MAC ADDRESS</dt>
+                <dt>MAC address</dt>
                 <dd>{{ macAddress }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>IP ADDRESS</dt>
+                <dt>IP address</dt>
                 <dd v-for="ip in ipAddress" v-bind:key="ip.id">{{ ip }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>FIRMWARE VERSION</dt>
+                <dt>Firmware version</dt>
                 <dd>{{ bmcActiveVersion }}</dd>
               </dl>
             </b-col>
@@ -63,13 +63,13 @@
           <b-row>
             <b-col sm="6">
               <dl>
-                <dt>POWER CONSUMPTION</dt>
+                <dt>Power consumption</dt>
                 <dd>{{ powerConsumption }}</dd>
               </dl>
             </b-col>
             <b-col sm="6">
               <dl>
-                <dt>POWER CAP</dt>
+                <dt>Power cap</dt>
                 <dd>{{ powerCapValue }}</dd>
               </dl>
             </b-col>
