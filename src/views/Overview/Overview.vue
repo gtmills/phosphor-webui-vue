@@ -3,7 +3,7 @@
     <PageTitle />
     <b-row>
       <b-col lg="8" sm="12">
-        <PageSection sectionTitle="Server Information">
+        <PageSection sectionTitle="Server information">
           <b-row>
             <b-col sm="6">
               <dl>
@@ -77,11 +77,11 @@
         </PageSection>
       </b-col>
       <b-col lg="4" sm="12">
-        <quickLinks />
+        <OverviewQuickLinks />
       </b-col>
     </b-row>
     <PageSection sectionTitle="High priority events">
-      <events />
+      <OverviewEvents />
     </PageSection>
   </b-container>
 </template>
@@ -95,8 +95,8 @@ import PageSection from '../../components/Global/PageSection';
 export default {
   name: 'Overview',
   components: {
-    quickLinks: OverviewQuickLinks,
-    events: OverviewEvents,
+    OverviewQuickLinks,
+    OverviewEvents,
     PageTitle,
     PageSection
   },
