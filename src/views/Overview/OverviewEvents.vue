@@ -2,8 +2,8 @@
   <div>
     <b-list-group v-for="logData in eventLogData" :key="logData.id">
       <b-list-group-item href="#" class="flex-column align-items-start">
-        {{ logData.logId }}
-        <b-badge variant="danger">{{ logData.severity }}</b-badge>
+        {{ '#' + logData.logId }}
+        <b-badge variant="danger">{{ logData.priority }}</b-badge>
         <div class="d-flex w-100 justify-content-between">
           <small>{{
             logData.Timestamp | date('MMM DD YYYY HH:MM:SS A ZZ')

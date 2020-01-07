@@ -34,19 +34,15 @@ const EventLogStore = {
             Informational: 'Low'
           };
           for (let key in eventLog) {
-            if (
-              key.includes('entry') &&
-              key.match(entryNumber) &&
-              !key.includes('callout')
-            ) {
+            if (key.includes('entry') && key.match(entryNumber)) {
               const eventKey = eventLog[key];
               const eventSeverity = eventKey.Severity.split('.').pop();
               const eventPriority = severityToPriorityMap[eventSeverity];
               eventLogEntries.push(
                 Object.assign(
                   {
-                    logId: '#' + eventKey.Id,
-                    severity: eventPriority,
+                    logId: eventKey.Id,
+                    priority: eventPriority,
                     timestamp: eventKey.Timestamp,
                     eventID: eventKey.EventID,
                     description: eventKey.Description
