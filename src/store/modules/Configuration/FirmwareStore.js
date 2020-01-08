@@ -29,10 +29,12 @@ const FirmwareStore = {
           const functionalImages =
             firmwareInfo['/xyz/openbmc_project/software/functional'].endpoints;
           for (let key in firmwareInfo) {
+            /**
+             * If "Functional" activation status is
+             * functional, else it is "activation"
+             * github.com/openbmc/phosphor-dbus-interfaces/blob/master/xyz/openbmc_project/Software/Activation.interface.yaml
+             */
             if (firmwareInfo[key].hasOwnProperty('Version')) {
-              // If "Functional" activation status is
-              // functional, else it is "activation"
-              // github.com/openbmc/phosphor-dbus-interfaces/blob/master/xyz/openbmc_project/Software/Activation.interface.yaml
               let activationStatus = '';
               if (firmwareInfo[key].Activation) {
                 activationStatus = firmwareInfo[key].Activation.split(
