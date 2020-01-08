@@ -30,7 +30,7 @@ const GlobalStore = {
   namespaced: true,
   state: {
     hostName: '--',
-    bmcTime: '--',
+    bmcTime: null,
     hostStatus: 'unreachable'
   },
   getters: {
