@@ -108,7 +108,7 @@ export default {
             this.$router.push('/');
           })
           .catch(error => {
-            this.errorMsg.title = 'Inavalid username or password.';
+            this.errorMsg.title = 'Invalid username or password.';
             this.errorMsg.action = 'Please try again.';
             console.log(error);
           })
