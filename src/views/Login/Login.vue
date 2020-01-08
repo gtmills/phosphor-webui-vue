@@ -86,7 +86,6 @@ export default {
       this.errorMsg.title = null;
       this.errorMsg.action = null;
 
-      // Name error message
       if (!this.userInfo.username || !this.userInfo.password) {
         this.errorMsg.title = 'Username and password required.';
       }
