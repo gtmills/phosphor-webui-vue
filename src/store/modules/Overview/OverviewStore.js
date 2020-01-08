@@ -29,8 +29,10 @@ const OverviewStore = {
         .then(response => {
           const serverInfo = response.data.data;
           commit('setServerModel', serverInfo.Model);
-          commit('setServerManufacturer', serverInfo.Manufacturer);
           commit('setServerSerialNumber', serverInfo.SerialNumber);
+          if (serverInfo.Manufacturer) {
+            commit('setServerManufacturer', serverInfo.Manufacturer);
+          }
         })
         .catch(error => {
           console.log(error);
