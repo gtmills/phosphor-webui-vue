@@ -36,16 +36,11 @@ const FirmwareStore = {
              */
             if (firmwareInfo[key].hasOwnProperty('Version')) {
               let activationStatus = '';
-              if (firmwareInfo[key].Activation) {
-                activationStatus = firmwareInfo[key].Activation.split(
-                  '.'
-                ).pop();
-              }
+              const imageType = firmwareInfo[key].Purpose.split('.').pop();
               if (functionalImages.includes(key)) {
                 activationStatus = 'Functional';
               }
               // Get BMC and Host active Versions
-              const imageType = firmwareInfo[key].Purpose.split('.').pop();
               if (activationStatus == 'Functional' && imageType == 'BMC') {
                 commit('setBmcActiveVersion', firmwareInfo[key].Version);
               }
