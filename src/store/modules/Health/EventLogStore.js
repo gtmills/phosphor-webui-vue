@@ -1,5 +1,16 @@
 import api from '../../api';
 
+const severityToPriorityMap = {
+  Emergency: 'High',
+  Alert: 'High',
+  Critical: 'High',
+  Error: 'High',
+  Warning: 'Medium',
+  Notice: 'Low',
+  Debug: 'Low',
+  Informational: 'Low'
+};
+
 const EventLogStore = {
   namespaced: true,
   state: {
@@ -20,18 +31,12 @@ const EventLogStore = {
           const eventLog = response.data.data;
           const entryNumber = /[1-9]/;
           const eventLogEntries = [];
-          const severityToPriorityMap = {
-            Emergency: 'High',
-            Alert: 'High',
-            Critical: 'High',
-            Error: 'High',
-            Warning: 'Medium',
-            Notice: 'Low',
-            Debug: 'Low',
-            Informational: 'Low'
-          };
           for (let key in eventLog) {
-            if (key.includes('entry') && key.match(entryNumber)) {
+            if (
+              key.includes('entry') &&
+              key.match(entryNumber) &&
+              !key.includes('callout')
+            ) {
               const eventKey = eventLog[key];
               const eventSeverity = eventKey.Severity.split('.').pop();
               const eventPriority = severityToPriorityMap[eventSeverity];
@@ -47,9 +52,9 @@ const EventLogStore = {
                   eventKey
                 )
               );
+              commit('setEventLogData', eventLogEntries);
             }
           }
-          commit('setEventLogData', eventLogEntries);
         })
         .catch(error => {
           console.log('Event Log Data:', error);

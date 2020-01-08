@@ -143,7 +143,6 @@ export default {
       this.$store.dispatch('powerConsumption/getPowerData');
       this.$store.dispatch('powerCap/getPowerCapData');
       this.$store.dispatch('networkSettings/getNetworkData');
-      this.$store.dispatch('eventLog/getEventLogData');
     }
   }
 };
