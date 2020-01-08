@@ -8,26 +8,14 @@ const NetworkSettingsStore = {
     macAddress: '--'
   },
   getters: {
-    networkData(state) {
-      return state.networkData;
-    },
-    ipAddress(state) {
-      return state.ipAddress;
-    },
-    macAddress(state) {
-      return state.macAddress;
-    }
+    networkData: state => state.networkData,
+    ipAddress: state => state.ipAddress,
+    macAddress: state => state.macAddress
   },
   mutations: {
-    setNetworkData(state, networkData) {
-      state.networkData = networkData;
-    },
-    setIpAddress(state, ipAddress) {
-      state.ipAddress = ipAddress;
-    },
-    setMacAddress(state, macAddress) {
-      state.macAddress = macAddress;
-    }
+    setNetworkData: (state, networkData) => (state.networkData = networkData),
+    setIpAddress: (state, ipAddress) => (state.ipAddress = ipAddress),
+    setMacAddress: (state, macAddress) => (state.macAddress = macAddress)
   },
   actions: {
     getNetworkData({ commit }) {

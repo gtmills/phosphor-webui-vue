@@ -7,20 +7,14 @@ const PowerCapStore = {
     powerCapValue: 'Not enabled'
   },
   getters: {
-    powerCapData(state) {
-      return state.powerCapData;
-    },
-    powerCapValue(state) {
-      return state.powerCapValue;
-    }
+    powerCapData: state => state.powerCapData,
+    powerCapValue: state => state.powerCapValue
   },
   mutations: {
-    setPowerCapData(state, powerCapData) {
-      state.powerCapData = powerCapData;
-    },
-    setPowerCapValue(state, powerCapValue) {
-      state.powerCapValue = powerCapValue;
-    }
+    setPowerCapData: (state, powerCapData) =>
+      (state.powerCapData = powerCapData),
+    setPowerCapValue: (state, powerCapValue) =>
+      (state.powerCapValue = powerCapValue)
   },
   actions: {
     getPowerCapData({ commit }) {

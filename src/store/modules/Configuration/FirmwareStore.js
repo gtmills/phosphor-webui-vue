@@ -8,26 +8,17 @@ const FirmwareStore = {
     hostActiveVersion: '--'
   },
   getters: {
-    firmwareInfo(state) {
-      return state.firmwareInfo;
-    },
-    bmcActiveVersion(state) {
-      return state.bmcActiveVersion;
-    },
-    hostActiveVersion(state) {
-      return state.hostActiveVersion;
-    }
+    firmwareInfo: state => state.firmwareInfo,
+    bmcActiveVersion: state => state.bmcActiveVersion,
+    hostActiveVersion: state => state.hostActiveVersion
   },
   mutations: {
-    setFirmwareInfo(state, firmwareInfo) {
-      state.firmwareInfo = firmwareInfo;
-    },
-    setBmcActiveVersion(state, bmcActiveVersion) {
-      state.bmcActiveVersion = bmcActiveVersion;
-    },
-    setHostActiveVersion(state, hostActiveVersion) {
-      state.hostActiveVersion = hostActiveVersion;
-    }
+    setFirmwareInfo: (state, firmwareInfo) =>
+      (state.firmwareInfo = firmwareInfo),
+    setBmcActiveVersion: (state, bmcActiveVersion) =>
+      (state.bmcActiveVersion = bmcActiveVersion),
+    setHostActiveVersion: (state, hostActiveVersion) =>
+      (state.hostActiveVersion = hostActiveVersion)
   },
   actions: {
     getFirmwareInfo({ commit }) {

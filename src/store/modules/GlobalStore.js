@@ -34,26 +34,15 @@ const GlobalStore = {
     hostStatus: 'unreachable'
   },
   getters: {
-    hostName(state) {
-      return state.hostName;
-    },
-    hostStatus(state) {
-      return state.hostStatus;
-    },
-    bmcTime(state) {
-      return state.bmcTime;
-    }
+    hostName: state => state.hostName,
+    hostStatus: state => state.hostStatus,
+    bmcTime: state => state.bmcTime
   },
   mutations: {
-    setHostName(state, hostName) {
-      state.hostName = hostName;
-    },
-    setBmcTime(state, bmcTime) {
-      state.bmcTime = bmcTime;
-    },
-    setHostStatus(state, hostState) {
-      state.hostStatus = hostStateMapper(hostState);
-    }
+    setHostName: (state, hostName) => (state.hostName = hostName),
+    setBmcTime: (state, bmcTime) => (state.bmcTime = bmcTime),
+    setHostStatus: (state, hostState) =>
+      (state.hostState = hostStateMapper(hostState))
   },
   actions: {
     getHostName({ commit }) {

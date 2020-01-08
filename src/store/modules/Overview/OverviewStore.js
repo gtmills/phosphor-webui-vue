@@ -9,32 +9,18 @@ const OverviewStore = {
     serverSerialNumber: '--'
   },
   getters: {
-    serverInfo(state) {
-      return state.serverInfo;
-    },
-    serverModel(state) {
-      return state.serverModel;
-    },
-    serverManufacturer(state) {
-      return state.serverManufacturer;
-    },
-    serverSerialNumber(state) {
-      return state.serverSerialNumber;
-    }
+    serverInfo: state => state.serverInfo,
+    serverModel: state => state.serverModel,
+    serverManufacturer: state => state.serverManufacturer,
+    serverSerialNumber: state => state.serverSerialNumber
   },
   mutations: {
-    setServerInfo(state, serverInfo) {
-      state.serverInfo = serverInfo;
-    },
-    setServerModel(state, serverModel) {
-      state.serverModel = serverModel;
-    },
-    setServerManufacturer(state, serverManufacturer) {
-      state.serverManufacturer = serverManufacturer;
-    },
-    setServerSerialNumber(state, serverSerialNumber) {
-      state.serverSerialNumber = serverSerialNumber;
-    }
+    setServerInfo: (state, serverInfo) => (state.serverInfo = serverInfo),
+    setServerModel: (state, serverModel) => (state.serverModel = serverModel),
+    setServerManufacturer: (state, serverManufacturer) =>
+      (state.serverManufacturer = serverManufacturer),
+    setServerSerialNumber: (state, serverSerialNumber) =>
+      (state.serverSerialNumber = serverSerialNumber)
   },
   actions: {
     getServerInfo({ commit }) {

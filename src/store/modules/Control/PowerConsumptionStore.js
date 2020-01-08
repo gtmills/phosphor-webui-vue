@@ -7,20 +7,13 @@ const PowerConsumptionStore = {
     powerConsumption: '--'
   },
   getters: {
-    powerData(state) {
-      return state.powerData;
-    },
-    powerConsumption(state) {
-      return state.powerConsumption;
-    }
+    powerData: state => state.powerData,
+    powerConsumption: state => state.powerConsumption
   },
   mutations: {
-    setPowerData(state, powerData) {
-      state.powerData = powerData;
-    },
-    setPowerConsumption(state, powerConsumption) {
-      state.powerConsumption = powerConsumption;
-    }
+    setPowerData: (state, powerData) => (state.powerData = powerData),
+    setPowerConsumption: (state, powerConsumption) =>
+      (state.powerConsumption = powerConsumption)
   },
   actions: {
     getPowerData({ commit }) {

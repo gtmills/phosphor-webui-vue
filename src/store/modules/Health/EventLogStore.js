@@ -6,14 +6,11 @@ const EventLogStore = {
     eventLogData: null
   },
   getters: {
-    eventLogData(state) {
-      return state.eventLogData;
-    }
+    eventLogData: state => state.eventLogData
   },
   mutations: {
-    setEventLogData(state, eventLogData) {
-      state.eventLogData = eventLogData;
-    }
+    setEventLogData: (state, eventLogData) =>
+      (state.eventLogData = eventLogData)
   },
   actions: {
     getEventLogData({ commit }) {
