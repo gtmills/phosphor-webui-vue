@@ -19,8 +19,8 @@ const PowerConsumptionStore = {
     getPowerData({ commit }) {
       api
         .get('/xyz/openbmc_project/sensors/power/total_power')
-        .then(({ data }) => {
-          const powerData = data.data;
+        .then(response => {
+          const powerData = response.data.data;
           let powerConsumption =
             powerData.Value * Math.pow(10, powerData.Scale) + ' W';
           commit('setPowerConsumption', powerConsumption);
