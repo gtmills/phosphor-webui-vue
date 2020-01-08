@@ -91,6 +91,7 @@ import OverviewQuickLinks from './OverviewQuickLinks';
 import OverviewEvents from './OverviewEvents';
 import PageTitle from '../../components/Global/PageTitle';
 import PageSection from '../../components/Global/PageSection';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Overview',
@@ -103,38 +104,18 @@ export default {
   created() {
     this.getOverviewInfo();
   },
-  computed: {
-    serverModel() {
-      return this.$store.getters['overview/serverModel'];
-    },
-    serverManufacturer() {
-      return this.$store.getters['overview/serverManufacturer'];
-    },
-    serverSerialNumber() {
-      return this.$store.getters['overview/serverSerialNumber'];
-    },
-    hostName() {
-      return this.$store.getters['global/hostName'];
-    },
-    hostActiveVersion() {
-      return this.$store.getters['firmware/hostActiveVersion'];
-    },
-    bmcActiveVersion() {
-      return this.$store.getters['firmware/bmcActiveVersion'];
-    },
-    powerConsumption() {
-      return this.$store.getters['powerConsumption/powerConsumption'];
-    },
-    powerCapValue() {
-      return this.$store.getters['powerCap/powerCapValue'];
-    },
-    ipAddress() {
-      return this.$store.getters['networkSettings/ipAddress'];
-    },
-    macAddress() {
-      return this.$store.getters['networkSettings/macAddress'];
-    }
-  },
+  computed: mapState({
+    serverModel: state => state.overview.serverModel,
+    serverManufacturer: state => state.overview.serverManufacturer,
+    serverSerialNumber: state => state.overview.serverSerialNumber,
+    hostName: state => state.global.hostName,
+    hostActiveVersion: state => state.firmware.hostActiveVersion,
+    bmcActiveVersion: state => state.firmware.bmcActiveVersion,
+    powerConsumption: state => state.powerConsumption.powerConsumption,
+    powerCapValue: state => state.powerCap.powerCapValue,
+    ipAddress: state => state.networkSettings.ipAddress,
+    macAddress: state => state.networkSettings.macAddress
+  }),
   methods: {
     getOverviewInfo() {
       this.$store.dispatch('overview/getServerInfo');
