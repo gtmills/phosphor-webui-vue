@@ -3,7 +3,7 @@
     <b-list-group-item class="flex-fill">
       <dl>
         <dt>BMC time</dt>
-        <dd>{{ bmc.Elapsed | date('MMM, DD YYYY HH:MM:SS A ZZ') }}</dd>
+        <dd>{{ bmcTime | date('MMM, DD YYYY HH:MM:SS A ZZ') }}</dd>
       </dl>
     </b-list-group-item>
     <b-list-group-item class="flex-fill">
@@ -11,8 +11,12 @@
       <dl>
         <dt>Server LED</dt>
         <dd>
-          <b-form-checkbox v-model="checked" name="check-button" switch>
-            <span v-if="!checked">on</span>
+          <b-form-checkbox
+            v-model="serverLEDChecked"
+            name="check-button"
+            switch
+          >
+            <span v-if="!serverLEDChecked">on</span>
             <span v-else>off</span>
           </b-form-checkbox>
         </dd>
@@ -53,17 +57,22 @@ export default {
   components: {
     ArrowRight16
   },
+  created() {
+    this.getBmcTime();
+  },
+  computed: {
+    bmcTime() {
+      return this.$store.getters['global/bmcTime'];
+    }
+  },
+  methods: {
+    getBmcTime() {
+      this.$store.dispatch('global/getBmcTime');
+    }
+  },
   data() {
     return {
-      bmc: {
-        Elapsed: 1574782085071
-      },
-      logging: {
-        entry: {
-          Severity: 'Error'
-        }
-      },
-      checked: false
+      serverLEDChecked: false
     };
   }
 };
