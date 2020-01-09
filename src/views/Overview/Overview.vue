@@ -1,11 +1,11 @@
 <template>
   <b-container fluid>
     <PageTitle />
-    <b-row class="quicklinks-section">
+    <div class="quicklinks-section">
       <OverviewQuickLinks />
-    </b-row>
+    </div>
     <b-row>
-      <b-col sm="12">
+      <b-col>
         <PageSection sectionTitle="Server Information">
           <b-row>
             <b-col sm="6">
