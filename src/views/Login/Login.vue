@@ -56,7 +56,7 @@
             type="submit"
             :disabled="disableSubmitButton"
             variant="primary"
-            >Login</b-button
+            >Log in</b-button
           >
         </b-form>
       </b-col>
@@ -77,8 +77,7 @@ export default {
         username: null,
         password: null
       },
-      disableSubmitButton: false,
-      submitButtonText: 'Login'
+      disableSubmitButton: false
     };
   },
   methods: {
@@ -88,13 +87,10 @@ export default {
 
       if (!this.userInfo.username || !this.userInfo.password) {
         this.errorMsg.title = 'Username and password required.';
+        return false;
       }
 
-      if (!this.errorMsg.title) {
-        return true;
-      }
-
-      return false;
+      return true;
     },
     login: function() {
       const isValidForm = this.validateForm();
@@ -166,7 +162,7 @@ export default {
   }
 
   p {
-    margin-top: 0.5rem;
+    margin-top: $spacer / 2;
     margin-bottom: 0;
   }
 }
