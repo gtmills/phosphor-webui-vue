@@ -132,5 +132,6 @@ export default {
 <style lang="scss" scoped>
 .quicklinks-section {
   margin-bottom: $spacer * 2;
+  margin-left: -1rem;
 }
 </style>
