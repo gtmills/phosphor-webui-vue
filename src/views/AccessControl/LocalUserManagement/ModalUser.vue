@@ -8,16 +8,11 @@
         Edit user
       </template>
     </template>
-    <b-form
-      novalidate
-      ref="form"
-      :validated="formWasValidated"
-      @submit="handleSubmit"
-    >
+    <b-form novalidate @submit="handleSubmit">
       <b-container>
         <b-row>
           <b-col>
-            <b-form-group label="Account status" :state="null">
+            <b-form-group label="Account status">
               <b-form-radio
                 v-model="form.status"
                 name="user-status"
@@ -33,7 +28,7 @@
                 Disabled
               </b-form-radio>
             </b-form-group>
-            <b-form-group label="Username" :invalid-feedback="invalidUsername">
+            <b-form-group label="Username">
               <b-form-text id="username-help-block">
                 Cannot start with a number
                 <br />
@@ -41,22 +36,32 @@
               </b-form-text>
               <b-form-input
                 type="text"
-                required
-                maxlength="16"
                 aria-describedby="username-help-block"
                 v-model="form.username"
+                @input="$v.form.username.$touch()"
+                :state="getValidationState('username')"
                 :disabled="!newUser && form.username === 'root'"
               />
+              <b-form-invalid-feedback role="alert">
+                <template v-if="!$v.form.username.required">
+                  Field required
+                </template>
+                <template v-else-if="!$v.form.username.maxLength">
+                  Length must be between 1 – 16 characters
+                </template>
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Privilege">
               <b-form-select
-                required
                 v-model="form.privilege"
                 :options="privilegeTypes"
+                :state="getValidationState('privilege')"
               >
               </b-form-select>
-              <b-form-invalid-feedback>
-                Field required
+              <b-form-invalid-feedback role="alert">
+                <template v-if="!$v.form.privilege.required">
+                  Field required
+                </template>
               </b-form-invalid-feedback>
             </b-form-group>
           </b-col>
@@ -71,12 +76,26 @@
                 required
                 v-model="form.password"
                 aria-describedby="password-help-block"
+                @input="$v.form.password.$touch()"
+                :state="getValidationState('password')"
               />
+              <b-form-invalid-feedback role="alert">
+                <template v-if="!$v.form.password.required">
+                  Field required
+                </template>
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Confirm user password">
-              <b-form-input type="password" required v-model="form.password" />
-              <b-form-invalid-feedback>
-                Field required
+              <b-form-input
+                type="password"
+                v-model="form.passwordConfirmation"
+                @input="$v.form.passwordConfirmation.$touch()"
+                :state="getValidationState('passwordConfirmation')"
+              />
+              <b-form-invalid-feedback role="alert">
+                <template v-if="!$v.form.passwordConfirmation.required">
+                  Field required
+                </template>
               </b-form-invalid-feedback>
             </b-form-group>
           </b-col>
@@ -95,63 +114,77 @@
 </template>
 
 <script>
+import { required, maxLength } from 'vuelidate/lib/validators';
+
 export default {
   props: ['user'],
   data() {
     return {
       privilegeTypes: ['Administrator', 'Operator', 'ReadOnly', 'NoAccess'],
-      formWasValidated: false
+      form: {
+        originalUsername: '',
+        status: true,
+        username: '',
+        privilege: '',
+        password: '',
+        passwordConfirmation: ''
+      }
     };
+  },
+  watch: {
+    user: function(value) {
+      if (value === null) return;
+      this.form.originalUsername = value.username;
+      this.form.username = value.username;
+      this.form.status = value.status === 'Enabled' ? true : false;
+      this.form.privilege = value.privilege;
+    }
   },
   computed: {
     newUser() {
       return this.user ? false : true;
-    },
-    form() {
-      return {
-        originalUsername: this.newUser ? null : this.user.username,
-        status: this.newUser
-          ? true
-          : this.user.status === 'Enabled'
-          ? true
-          : false,
-        username: this.newUser ? '' : this.user.username,
-        privilege: this.newUser ? '' : this.user.privilege,
-        password: ''
-      };
-    },
-    invalidUsername() {
-      const username = this.form.username;
-      if (username.length === 0) {
-        return 'Field required';
+    }
+  },
+  validations: {
+    form: {
+      username: {
+        required,
+        maxLength: maxLength(16)
+      },
+      privilege: {
+        required
+      },
+      password: {
+        required
+      },
+      passwordConfirmation: {
+        required
       }
-      return '';
     }
   },
   methods: {
     handleSubmit() {
-      const isFormValid = this.validateForm();
-      if (!isFormValid) {
-        this.formWasValidated = true;
-        return;
-      }
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
+
       this.$emit('ok', { isNewUser: this.newUser, userData: this.form });
       // manually close modal
       this.$nextTick(() => {
         this.$refs.modal.hide();
       });
     },
+    getValidationState(name) {
+      const { $dirty, $error } = this.$v.form[name];
+      return $dirty ? !$error : null;
+    },
     resetForm() {
-      this.formWasValidated = false;
+      this.form.originalUsername = '';
+      this.form.status = true;
       this.form.username = '';
       this.form.privilege = '';
       this.form.password = '';
-    },
-    validateForm() {
-      if (this.form.username && this.form.privilege && this.form.password) {
-        return true;
-      }
-      return false;
+      this.form.passwordConfirmation = '';
+      this.$v.$reset();
     },
     onOk(bvModalEvt) {
       // prevent modal close

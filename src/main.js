@@ -23,6 +23,7 @@ import {
   NavPlugin,
   TablePlugin
 } from 'bootstrap-vue';
+import Vuelidate from 'vuelidate';
 
 Vue.filter('date', dateFilter);
 
@@ -51,6 +52,7 @@ Vue.use(ModalPlugin);
 Vue.use(NavbarPlugin);
 Vue.use(NavPlugin);
 Vue.use(TablePlugin);
+Vue.use(Vuelidate);
 
 new Vue({
   router,
