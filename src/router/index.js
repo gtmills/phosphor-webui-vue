@@ -28,6 +28,14 @@ const routes = [
         meta: {
           title: 'Local user management'
         }
+      },
+      {
+        path: '/unauthorized',
+        name: 'unauthorized',
+        component: () => import('@/views/Unauthorized'),
+        meta: {
+          title: 'Unauthorized'
+        }
       }
     ]
   },
@@ -44,7 +52,7 @@ const routes = [
 const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
-  linkExactActiveClass: 'nav__link--current'
+  linkExactActiveClass: 'nav-link--current'
 });
 
 router.beforeEach((to, from, next) => {

@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import { dateFilter } from 'vue-date-fns';
 import {
+  AlertPlugin,
   BadgePlugin,
   ButtonPlugin,
   BVConfigPlugin,
@@ -32,6 +33,7 @@ Vue.use(BVConfigPlugin, {
     footVariant: 'light'
   }
 });
+Vue.use(AlertPlugin);
 Vue.use(BadgePlugin);
 Vue.use(ButtonPlugin);
 Vue.use(CollapsePlugin);
