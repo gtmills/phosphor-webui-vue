@@ -27,7 +27,8 @@
       <!-- TODO: link to network settings -->
       <b-button
         href="#"
-        class="btn btn-secondary d-flex justify-content-between align-items-center"
+        variant="secondary"
+        class="d-flex justify-content-between align-items-center"
       >
         <span>Edit network settings</span>
         <IconArrowRight />
@@ -37,7 +38,8 @@
       <!-- TODO: link to SOL -->
       <b-button
         href="#"
-        class="btn btn-secondary  d-flex justify-content-between align-items-center"
+        variant="secondary"
+        class="d-flex justify-content-between align-items-center"
       >
         <span>Serial over LAN console</span>
         <IconArrowRight />
