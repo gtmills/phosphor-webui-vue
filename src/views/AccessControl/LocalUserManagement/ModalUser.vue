@@ -16,7 +16,7 @@
               <b-form-radio
                 v-model="form.status"
                 name="user-status"
-                value="true"
+                :value="true"
                 @input="$v.form.status.$touch()"
               >
                 Enabled
@@ -24,7 +24,7 @@
               <b-form-radio
                 v-model="form.status"
                 name="user-status"
-                value="false"
+                :value="false"
                 @input="$v.form.status.$touch()"
               >
                 Disabled
@@ -42,7 +42,7 @@
                 v-model="form.username"
                 @input="$v.form.username.$touch()"
                 :state="getValidationState('username')"
-                :disabled="!newUser && form.originalUsername === 'root'"
+                :disabled="!newUser && originalUsername === 'root'"
               />
               <b-form-invalid-feedback role="alert">
                 <template v-if="!$v.form.username.required">
@@ -224,10 +224,16 @@ export default {
         if (this.$v.form.password.$dirty) {
           userData.password = this.form.password;
         }
+        if (Object.entries(userData).length === 1) {
+          this.closeModal();
+          return;
+        }
       }
 
       this.$emit('ok', { isNewUser: this.newUser, userData });
-      // manually close modal
+      this.closeModal();
+    },
+    closeModal() {
       this.$nextTick(() => {
         this.$refs.modal.hide();
       });
