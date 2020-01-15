@@ -49,6 +49,9 @@
                 <template v-else-if="!$v.form.username.maxLength">
                   Length must be between 1 – 16 characters
                 </template>
+                <template v-else-if="!$v.form.username.pattern">
+                  Invalid format
+                </template>
               </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Privilege">
@@ -83,6 +86,13 @@
                 <template v-if="!$v.form.password.required">
                   Field required
                 </template>
+                <template
+                  v-if="
+                    !$v.form.password.minLength || !$v.form.password.maxLength
+                  "
+                >
+                  Length must be between 8 – 20 characters
+                </template>
               </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Confirm user password">
@@ -95,6 +105,11 @@
               <b-form-invalid-feedback role="alert">
                 <template v-if="!$v.form.passwordConfirmation.required">
                   Field required
+                </template>
+                <template
+                  v-else-if="!$v.form.passwordConfirmation.sameAsPassword"
+                >
+                  Passwords do not match
                 </template>
               </b-form-invalid-feedback>
             </b-form-group>
@@ -114,7 +129,13 @@
 </template>
 
 <script>
-import { required, maxLength } from 'vuelidate/lib/validators';
+import {
+  required,
+  maxLength,
+  minLength,
+  sameAs,
+  helpers
+} from 'vuelidate/lib/validators';
 
 export default {
   props: ['user'],
@@ -149,16 +170,20 @@ export default {
     form: {
       username: {
         required,
-        maxLength: maxLength(16)
+        maxLength: maxLength(16),
+        pattern: helpers.regex('pattern', /^([a-zA-Z_][a-zA-Z0-9_]*)/)
       },
       privilege: {
         required
       },
       password: {
-        required
+        required,
+        minLength: minLength(8),
+        maxLength: maxLength(20)
       },
       passwordConfirmation: {
-        required
+        required,
+        sameAsPassword: sameAs('password')
       }
     }
   },
