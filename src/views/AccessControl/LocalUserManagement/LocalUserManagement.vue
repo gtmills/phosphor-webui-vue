@@ -118,7 +118,8 @@ export default {
           actions: {
             edit: true,
             delete: user.UserName === 'root' ? false : true
-          }
+          },
+          ...user
         };
       });
     }

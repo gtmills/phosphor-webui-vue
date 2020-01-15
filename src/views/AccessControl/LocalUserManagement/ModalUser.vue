@@ -17,6 +17,7 @@
                 v-model="form.status"
                 name="user-status"
                 value="true"
+                @input="$v.form.status.$touch()"
               >
                 Enabled
               </b-form-radio>
@@ -24,6 +25,7 @@
                 v-model="form.status"
                 name="user-status"
                 value="false"
+                @input="$v.form.status.$touch()"
               >
                 Disabled
               </b-form-radio>
@@ -40,7 +42,7 @@
                 v-model="form.username"
                 @input="$v.form.username.$touch()"
                 :state="getValidationState('username')"
-                :disabled="!newUser && form.username === 'root'"
+                :disabled="!newUser && form.originalUsername === 'root'"
               />
               <b-form-invalid-feedback role="alert">
                 <template v-if="!$v.form.username.required">
@@ -59,6 +61,7 @@
                 v-model="form.privilege"
                 :options="privilegeTypes"
                 :state="getValidationState('privilege')"
+                @input="$v.form.privilege.$touch()"
               >
               </b-form-select>
               <b-form-invalid-feedback role="alert">
@@ -134,7 +137,8 @@ import {
   maxLength,
   minLength,
   sameAs,
-  helpers
+  helpers,
+  requiredIf
 } from 'vuelidate/lib/validators';
 
 export default {
@@ -142,8 +146,8 @@ export default {
   data() {
     return {
       privilegeTypes: ['Administrator', 'Operator', 'ReadOnly', 'NoAccess'],
+      originalUsername: '',
       form: {
-        originalUsername: '',
         status: true,
         username: '',
         privilege: '',
@@ -155,9 +159,9 @@ export default {
   watch: {
     user: function(value) {
       if (value === null) return;
-      this.form.originalUsername = value.username;
+      this.originalUsername = value.username;
       this.form.username = value.username;
-      this.form.status = value.status === 'Enabled' ? true : false;
+      this.form.status = value.Enabled;
       this.form.privilege = value.privilege;
     }
   },
@@ -168,6 +172,9 @@ export default {
   },
   validations: {
     form: {
+      status: {
+        required
+      },
       username: {
         required,
         maxLength: maxLength(16),
@@ -177,30 +184,53 @@ export default {
         required
       },
       password: {
-        required,
+        required: requiredIf(function() {
+          return this.requirePassword();
+        }),
         minLength: minLength(8),
         maxLength: maxLength(20)
       },
       passwordConfirmation: {
-        required,
+        required: requiredIf(function() {
+          return this.requirePassword();
+        }),
         sameAsPassword: sameAs('password')
       }
     }
   },
   methods: {
     handleSubmit() {
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
+      let userData = {};
 
-      this.$emit('ok', { isNewUser: this.newUser, userData: this.form });
+      if (this.newUser) {
+        this.$v.$touch();
+        if (this.$v.$invalid) return;
+        userData.username = this.form.username;
+        userData.status = this.form.status;
+        userData.privilege = this.form.privilege;
+        userData.password = this.form.password;
+      } else {
+        if (this.$v.$invalid) return;
+        userData.originalUsername = this.originalUsername;
+        if (this.$v.form.status.$dirty) {
+          userData.status = this.form.status;
+        }
+        if (this.$v.form.username.$dirty) {
+          userData.username = this.form.username;
+        }
+        if (this.$v.form.privilege.$dirty) {
+          userData.privilege = this.form.privilege;
+        }
+        if (this.$v.form.password.$dirty) {
+          userData.password = this.form.password;
+        }
+      }
+
+      this.$emit('ok', { isNewUser: this.newUser, userData });
       // manually close modal
       this.$nextTick(() => {
         this.$refs.modal.hide();
       });
-    },
-    getValidationState(name) {
-      const { $dirty, $error } = this.$v.form[name];
-      return $dirty ? !$error : null;
     },
     resetForm() {
       this.form.originalUsername = '';
@@ -210,6 +240,16 @@ export default {
       this.form.password = '';
       this.form.passwordConfirmation = '';
       this.$v.$reset();
+    },
+    getValidationState(name) {
+      const { $dirty, $error } = this.$v.form[name];
+      return $dirty ? !$error : null;
+    },
+    requirePassword() {
+      if (this.newUser) return true;
+      if (this.$v.form.password.$dirty) return true;
+      if (this.$v.form.passwordConfirmation.$dirty) return true;
+      return false;
     },
     onOk(bvModalEvt) {
       // prevent modal close
