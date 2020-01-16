@@ -79,7 +79,6 @@
               </b-form-text>
               <b-form-input
                 type="password"
-                required
                 v-model="form.password"
                 aria-describedby="password-help-block"
                 @input="$v.form.password.$touch()"

@@ -18,18 +18,12 @@
 .form-control {
   //important needed to override validation colors on radio labels
   color: $gray-900!important;
+  border-color: $gray-400!important;
   &::before {
     border-color: $primary;
   }
-}
-
-.was-validated {
-  .custom-select,
-  .form-control {
-    //important needed to override validation specificiy
-    border-color: $gray-400!important;
-    &:invalid {
-      border-bottom: 2px solid $danger!important;
-    }
+  &.is-invalid,
+  &:invalid {
+    border-bottom: 2px solid $danger!important;
   }
 }
