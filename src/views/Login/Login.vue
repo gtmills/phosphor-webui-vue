@@ -14,10 +14,10 @@
       </b-col>
 
       <b-col class="login-form" md="6">
-        <b-form @submit.prevent="login" novalidate>
+        <b-form novalidate @submit.prevent="login">
           <b-alert
-            class="login-error"
             v-if="errorMsg.title"
+            class="login-error"
             show
             variant="danger"
           >
